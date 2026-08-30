@@ -11,6 +11,7 @@
       --surface: #ffffff;
       --surface-soft: #eef4ff;
       --text: #14213d;
+      --topbar-text: #14213d;
       --muted: #5b6984;
       --line: #dce4f0;
       --accent: #3b5ccc;
@@ -27,6 +28,7 @@
       --surface: #172033;
       --surface-soft: #202b42;
       --text: #edf2ff;
+      --topbar-text: #f9ebff;
       --muted: #afbdd3;
       --line: #33415c;
       --accent: #9db3ff;
@@ -67,6 +69,7 @@
       justify-content: space-between;
       gap: 16px;
       padding: 24px 0 16px;
+      color: var(--topbar-text);
     }
 
     .brand { display: flex; align-items: center; gap: 12px; }
@@ -78,6 +81,7 @@
       border-radius: 14px;
       background: var(--accent);
       color: var(--page);
+      font-family: system-ui, sans-serif;
       font-weight: 900;
       box-shadow: var(--shadow);
     }
