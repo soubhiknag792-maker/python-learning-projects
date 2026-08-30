@@ -41,10 +41,11 @@
     .field{display:grid;gap:6px}.field>span{color:var(--muted);font-size:.88rem;font-weight:650}.input,.select,.textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);padding:10px 12px}.select{min-width:170px}.textarea{min-height:110px;resize:vertical}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.form-grid .full{grid-column:1/-1}
     .checklist{display:grid;gap:10px;margin:16px 0;padding:0;list-style:none}.checklist label{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:var(--soft);cursor:pointer}.checklist input{width:18px;height:18px;margin-top:3px;accent-color:var(--accent)}.checklist input:checked+span{color:var(--muted);text-decoration:line-through}
     .notice{padding:12px 14px;border-left:4px solid var(--accent);border-radius:8px;background:var(--soft);color:var(--muted)}.empty{padding:28px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);text-align:center}.hidden-input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+    .learn-toolbar{display:grid;grid-template-columns:minmax(220px,1fr) repeat(2,minmax(160px,.35fr));gap:10px;margin-bottom:16px}.learn-layout{display:grid;grid-template-columns:minmax(230px,.7fr) minmax(0,2fr);gap:16px}.library-nav{max-height:720px;overflow:auto;padding:8px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}.lesson-link{display:block;width:100%;border:0;border-radius:11px;background:transparent;color:var(--text);cursor:pointer;padding:11px 12px;text-align:left}.lesson-link:hover,.lesson-link[aria-current="true"]{background:var(--soft);color:var(--accent-strong)}.lesson-link small{display:block;color:var(--muted);margin-top:2px}.lesson-view{min-width:0}.lesson-view h2{margin-bottom:6px}.lesson-section{margin-top:20px}.lesson-section h3{margin-bottom:8px}.code-block{position:relative;margin:0;overflow:auto;border:1px solid var(--line);border-radius:13px;background:#0b1220;color:#e7eefc;padding:16px;font:500 .88rem/1.6 ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;white-space:pre}.function-grid,.reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.function-item{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}.function-item code{font-weight:750;color:var(--accent-strong)}.guidance-list{margin:8px 0;padding-left:20px}.learning-path{margin:14px 0;padding:14px;border:1px solid var(--line);border-radius:13px;background:var(--soft)}.learning-path h3{margin:0 0 8px}.learning-path .lesson-link{padding:7px 9px}.reference-group{padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}.reference-group h3{margin:0 0 8px}.reference-group ul{margin:0;padding-left:20px}.reference-group li+li{margin-top:5px}.repo-stats{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.repo-stats span{border:1px solid var(--line);border-radius:999px;background:var(--soft);padding:5px 10px;color:var(--muted);font-size:.84rem}
     dialog{width:min(620px,calc(100% - 24px));max-height:calc(100vh - 40px);overflow:auto;border:1px solid var(--line);border-radius:20px;background:var(--surface);color:var(--text);padding:0;box-shadow:var(--shadow)}dialog::backdrop{background:rgba(15,23,42,.68)}.dialog-body{padding:24px}.dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}.dialog-head h2{margin:0}.dialog-head p{margin:4px 0 0;color:var(--muted)}
     .toast{position:fixed;right:20px;bottom:20px;z-index:20;max-width:min(360px,calc(100% - 40px));padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);box-shadow:var(--shadow)}.toast[hidden]{display:none}footer{padding:8px 0 32px;color:var(--muted);font-size:.84rem;text-align:center}
-    @media(max-width:820px){.hero{grid-template-columns:1fr;padding:24px}.card,.card.wide{grid-column:1/-1}}
-    @media(max-width:560px){.shell{width:min(100% - 20px,1120px)}.topbar{align-items:flex-start}.brand span{display:none}.hero{padding:20px;border-radius:20px}.meta-row{grid-template-columns:1fr;gap:2px}.toolbar{align-items:stretch;flex-direction:column}.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}}
+    @media(max-width:820px){.hero{grid-template-columns:1fr;padding:24px}.card,.card.wide{grid-column:1/-1}.learn-layout{grid-template-columns:1fr}.library-nav{max-height:280px}.learn-toolbar{grid-template-columns:1fr 1fr}.learn-toolbar .field:first-child{grid-column:1/-1}}
+    @media(max-width:560px){.shell{width:min(100% - 20px,1120px)}.topbar{align-items:flex-start}.brand span{display:none}.hero{padding:20px;border-radius:20px}.meta-row{grid-template-columns:1fr;gap:2px}.toolbar{align-items:stretch;flex-direction:column}.form-grid,.learn-toolbar,.function-grid,.reference-grid{grid-template-columns:1fr}.form-grid .full,.learn-toolbar .field:first-child{grid-column:auto}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
@@ -64,6 +65,7 @@
 
     <nav class="tabs" role="tablist" aria-label="Learning dashboard sections">
       <button class="tab" id="tab-overview" role="tab" aria-selected="true" aria-controls="panel-overview" tabindex="0">Overview</button>
+      <button class="tab" id="tab-learn" role="tab" aria-selected="false" aria-controls="panel-learn" tabindex="-1">Learn</button>
       <button class="tab" id="tab-practice" role="tab" aria-selected="false" aria-controls="panel-practice" tabindex="-1">Practice</button>
       <button class="tab" id="tab-curriculum" role="tab" aria-selected="false" aria-controls="panel-curriculum" tabindex="-1">Curriculum</button>
       <button class="tab" id="tab-projects" role="tab" aria-selected="false" aria-controls="panel-projects" tabindex="-1">Projects</button>
@@ -77,8 +79,24 @@
       <article class="card full"><h2>Local data</h2><p class="notice">This page autosaves a private working copy in this browser. Export it before clearing browser data. Your coach should review real code and tests before copying evidence into <code>progress.md</code>.</p><div class="actions"><button class="button" id="export-data-secondary" type="button">Export JSON backup</button><button class="button danger" id="reset-data" type="button">Reset local progress</button></div></article>
     </div></section>
 
+    <section class="panel" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn" hidden>
+      <div class="card full">
+        <p class="eyebrow">Python knowledge library</p><h2>Learn the ideas your project needs</h2>
+        <p class="muted">Search from first principles through advanced Python. Each lesson includes syntax, examples, functions, guidance, and a small practice prompt.</p>
+        <div class="repo-stats" id="repository-stats"></div>
+        <div class="learn-toolbar">
+          <label class="field"><span>Search lessons and functions</span><input class="input" id="lesson-search" type="search" placeholder="Try: dictionaries, zip, pathlib, async"></label>
+          <label class="field"><span>Level</span><select class="select" id="lesson-level"><option value="all">All levels</option><option value="Beginner">Beginner</option><option value="Intermediate">Intermediate</option><option value="Advanced">Advanced</option></select></label>
+          <label class="field"><span>Project</span><select class="select" id="lesson-project"><option value="all">All projects</option></select></label>
+        </div>
+        <div class="learn-layout"><nav class="library-nav" id="lesson-list" aria-label="Python lesson library"></nav><article class="lesson-view" id="lesson-view" aria-live="polite"></article></div>
+      </div>
+      <div class="card full"><div class="toolbar"><h2>Built-in function quick reference</h2><span class="muted">Use search above to narrow this reference</span></div><div class="reference-grid" id="builtin-reference"></div></div>
+      <div class="card full"><h2>Standard-library map</h2><p class="muted">Start with these modules when a project needs them; use <code>help()</code> and official docs to inspect unfamiliar APIs.</p><div class="reference-grid" id="stdlib-reference"></div></div>
+    </section>
+
     <section class="panel" id="panel-practice" role="tabpanel" aria-labelledby="tab-practice" hidden><div class="grid">
-      <article class="card wide"><p class="eyebrow">Active build</p><h2 id="practice-title">Complete placement to begin</h2><p class="muted" id="practice-purpose">Your recommended project and checklist will appear here.</p><ul class="checklist" id="practice-tasks"></ul><div class="actions"><button class="button primary" id="finish-project" type="button" disabled>Mark ready for review</button><button class="button" id="copy-brief" type="button" disabled>Copy project brief</button></div><div class="status" id="practice-status" role="status" aria-live="polite"></div></article>
+      <article class="card wide"><p class="eyebrow">Active build</p><h2 id="practice-title">Complete placement to begin</h2><p class="muted" id="practice-purpose">Your recommended project and checklist will appear here.</p><div class="learning-path" id="project-learning-path"></div><ul class="checklist" id="practice-tasks"></ul><div class="actions"><button class="button primary" id="finish-project" type="button" disabled>Mark ready for review</button><button class="button" id="copy-brief" type="button" disabled>Copy project brief</button></div><div class="status" id="practice-status" role="status" aria-live="polite"></div></article>
       <article class="card"><h2>Code scratchpad</h2><label class="field" for="scratchpad"><span>Draft ideas or Python code</span><textarea class="textarea" id="scratchpad" spellcheck="false" placeholder="# Your notes stay in this browser"></textarea></label><p class="muted">Saved locally. This static page does not execute Python; run code in your terminal and record the result below.</p></article>
       <article class="card full"><h2>Close this learning session</h2><form id="session-form" class="form-grid"><label class="field"><span>What did you build or change?</span><textarea class="textarea" id="session-outcome" required></textarea></label><label class="field"><span>What command/result did you verify?</span><textarea class="textarea" id="session-verification" placeholder="Example: py -m unittest — 6 tests passed"></textarea></label><label class="field full"><span>What is the next small step?</span><input class="input" id="session-next" required></label><div class="actions full"><button class="button primary" type="submit">Save session locally</button></div></form></article>
     </div></section>
@@ -130,6 +148,239 @@
   }
   </script>
 
+  <script id="knowledge-data" type="application/json">
+  {
+    "lessons": [
+      {
+        "id":"start","order":1,"level":"Beginner","phase":"Foundations","title":"Running Python and asking for help","summary":"Understand source files, the interpreter, comments, errors, and Python's built-in discovery tools.",
+        "syntax":"# comment\nprint(\"Hello, Python!\")\nhelp(str)\ndir(str)",
+        "example":"name = \"Ada\"\nprint(f\"Hello, {name}!\")\nprint(type(name).__name__)",
+        "functions":["print(value) — display output","type(value) — inspect a value's type","help(object) — open built-in documentation","dir(object) — list available names"],
+        "guidance":["Run a saved .py file with the same interpreter you will use for projects.","Read the final traceback line first, then use the reported file and line number.","Use help() and small experiments instead of memorising every API."],
+        "practice":"Create hello.py, print two values, intentionally make one syntax error, then fix it.","projects":["quiz"]
+      },
+      {
+        "id":"values","order":2,"level":"Beginner","phase":"Foundations","title":"Values, variables, and core types","summary":"Store information with clear names and convert deliberately between numbers, text, and Boolean values.",
+        "syntax":"count = 3          # int\nprice = 4.5        # float\nname = \"Mira\"      # str\nactive = True      # bool\ncount += 1",
+        "example":"price_text = \"19.95\"\nquantity = 3\ntotal = float(price_text) * quantity\nprint(f\"Total: {total:.2f}\")",
+        "functions":["int(x) — convert to integer","float(x) — convert to decimal number","str(x) — convert to text","bool(x) — evaluate truthiness","isinstance(x, T) — test a type safely"],
+        "guidance":["A variable is a name referring to a value, not a labelled box with a permanent type.","Choose names that explain meaning, such as total_price rather than x.","Expect conversion to fail for unsuitable input and handle that at program boundaries."],
+        "practice":"Convert a temperature entered as text to a float and print both Celsius and Fahrenheit.","projects":["quiz","expense"]
+      },
+      {
+        "id":"operators","order":3,"level":"Beginner","phase":"Foundations","title":"Operators and expressions","summary":"Combine values using arithmetic, comparisons, Boolean logic, membership, and identity checks.",
+        "syntax":"total = price * quantity\nis_adult = age >= 18\nin_range = 1 <= score <= 10\nallowed = logged_in and not blocked\nfound = \"py\" in language.lower()",
+        "example":"subtotal = 120\ndiscount = 0.10 if subtotal >= 100 else 0\nfinal = subtotal * (1 - discount)\nprint(round(final, 2))",
+        "functions":["abs(x) — absolute value","round(x, ndigits) — rounded number","pow(a, b) — exponentiation","divmod(a, b) — quotient and remainder","all(items) / any(items) — combine truth values"],
+        "guidance":["Use == for value equality and is primarily for None or object identity.","Parenthesize mixed Boolean expressions when intent is not immediately obvious.","Remember that and/or return operands, not necessarily True or False."],
+        "practice":"Write an expression that accepts a score only when it is numeric and between 0 and 100.","projects":["quiz","expense"]
+      },
+      {
+        "id":"input-output","order":4,"level":"Beginner","phase":"Foundations","title":"Input, output, and formatted strings","summary":"Read user text, validate it, and present clear output with f-strings and formatting specifications.",
+        "syntax":"name = input(\"Name: \").strip()\nprint(f\"Welcome, {name or 'learner'}\")\nprint(f\"{12.5:>10.2f}\")",
+        "example":"raw = input(\"How many questions? \").strip()\nif raw.isdigit():\n    count = int(raw)\n    print(f\"Starting {count} questions\")\nelse:\n    print(\"Enter a whole number.\")",
+        "functions":["input(prompt) — read one text line","print(*values, sep, end) — display values","format(value, spec) — apply a format specification","repr(value) — developer-oriented representation"],
+        "guidance":["input() always returns a string.","Normalize text once with strip() and lower()/casefold() before comparison.","Keep presentation separate from calculations as projects grow."],
+        "practice":"Ask for a name and two prices, then print a neatly formatted receipt.","projects":["quiz","expense"]
+      },
+      {
+        "id":"decisions-loops","order":5,"level":"Beginner","phase":"Control flow","title":"Decisions and loops","summary":"Choose branches and repeat work with if, for, while, range, break, and continue.",
+        "syntax":"if condition:\n    ...\nelif other_condition:\n    ...\nelse:\n    ...\n\nfor item in items:\n    ...\n\nwhile condition:\n    ...",
+        "example":"score = 0\nfor answer in [\"python\", \"3\", \"list\"]:\n    if not answer:\n        continue\n    if answer == \"python\":\n        score += 1\nprint(f\"Score: {score}\")",
+        "functions":["range(start, stop, step) — integer sequence","enumerate(items, start=0) — index and value","zip(a, b) — parallel iteration","reversed(items) — reverse iterator"],
+        "guidance":["Use for when iterating over known items; use while when repetition depends on changing state.","Update the condition of every while loop so it can terminate.","Prefer direct iteration over manual index bookkeeping."],
+        "practice":"Loop through five answers, skip blanks, and count correct responses.","projects":["quiz","expense","logs"]
+      },
+      {
+        "id":"functions","order":6,"level":"Beginner","phase":"Functions","title":"Functions, parameters, and return values","summary":"Break behavior into named units that receive data explicitly and return useful results.",
+        "syntax":"def calculate_total(values, tax_rate=0.0):\n    \"\"\"Return the taxed sum of values.\"\"\"\n    subtotal = sum(values)\n    return subtotal * (1 + tax_rate)",
+        "example":"def normalize_answer(answer):\n    return answer.strip().casefold()\n\ndef is_correct(answer, expected):\n    return normalize_answer(answer) == normalize_answer(expected)\n\nprint(is_correct(\" Python \", \"python\"))",
+        "functions":["callable(x) — whether x can be called","locals() / globals() — inspect scopes","map(function, items) — lazy transformation","filter(function, items) — lazy selection"],
+        "guidance":["A function should have one clear responsibility and a useful name.","Prefer returning data over printing inside reusable calculation functions.","Avoid mutable default arguments; use None and create the object inside."],
+        "practice":"Extract answer normalization and scoring from a quiz loop into separate functions.","projects":["quiz","expense","organiser","contacts","logs","api","tasks","capstone"]
+      },
+      {
+        "id":"strings","order":7,"level":"Beginner","phase":"Collections","title":"Strings and text processing","summary":"Slice, search, split, join, normalize, and format immutable text.",
+        "syntax":"clean = text.strip().casefold()\nwords = clean.split()\nslug = \"-\".join(words)\nfirst_three = text[:3]\nchanged = text.replace(\"old\", \"new\")",
+        "example":"line = \"ERROR | Disk almost full\"\nlevel, message = [part.strip() for part in line.split(\"|\", maxsplit=1)]\nprint(level.casefold(), message)",
+        "functions":["len(text) — character count","ord(char) / chr(code) — Unicode conversion","format(value, spec) — formatted text","ascii(value) — escaped representation"],
+        "guidance":["String methods return new strings; they do not modify the original.","Use casefold() for robust caseless comparison and lower() for simpler display-oriented needs.","Split only as much as the data format allows by using maxsplit."],
+        "practice":"Parse 'category: amount' text into two cleaned values.","projects":["quiz","expense","organiser","contacts","logs","api"]
+      },
+      {
+        "id":"sequences","order":8,"level":"Beginner","phase":"Collections","title":"Lists, tuples, slicing, and unpacking","summary":"Choose mutable lists or fixed-shape tuples and work with sequence operations safely.",
+        "syntax":"items = [\"a\", \"b\"]\nitems.append(\"c\")\nfirst, *middle, last = items\ncopy = items[:]\npoint = (10, 20)",
+        "example":"expenses = [12.5, 9.0, 31.25]\nexpenses.append(5.5)\nrecent = expenses[-2:]\nprint(sum(expenses), recent)",
+        "functions":["list(iterable) — mutable sequence","tuple(iterable) — immutable sequence","len(items) — number of items","min/max/sum(items) — aggregate values","sorted(items, key=...) — new sorted list"],
+        "guidance":["Use a tuple for a fixed record shape only when field meaning stays obvious.","A shallow copy duplicates the outer container, not nested objects.","Slicing excludes the stop position."],
+        "practice":"Store expenses in a list, add three values, and show total, minimum, and largest.","projects":["expense","contacts","logs","api"]
+      },
+      {
+        "id":"mappings-sets","order":9,"level":"Intermediate","phase":"Collections","title":"Dictionaries and sets","summary":"Model keyed records with dictionaries and uniqueness or fast membership with sets.",
+        "syntax":"person = {\"name\": \"Ada\", \"city\": \"London\"}\nperson[\"language\"] = \"Python\"\ncity = person.get(\"city\", \"Unknown\")\nseen = {\"a.py\", \"b.py\"}",
+        "example":"totals = {}\nfor category, amount in [(\"food\", 10), (\"travel\", 7), (\"food\", 4)]:\n    totals[category] = totals.get(category, 0) + amount\nfor category, total in sorted(totals.items()):\n    print(category, total)",
+        "functions":["dict(pairs) — mapping","set(items) — unique items","zip(keys, values) — combine parallel data","len(mapping) — key count","hash(value) — hash used by dict/set"],
+        "guidance":["Use get() for an optional key; direct indexing is appropriate when absence is an error.","Dictionary iteration visits keys unless you request values() or items().","Set operations include union |, intersection &, difference -, and symmetric difference ^."],
+        "practice":"Build category totals from a list of expense dictionaries.","projects":["expense","contacts","logs","api","tasks"]
+      },
+      {
+        "id":"comprehensions","order":10,"level":"Intermediate","phase":"Collections","title":"Comprehensions, sorting, and iteration patterns","summary":"Transform, filter, pair, and order data with readable iteration tools.",
+        "syntax":"squares = [n*n for n in numbers if n >= 0]\nlookup = {item.id: item for item in items}\nunique = {word.casefold() for word in words}\nordered = sorted(rows, key=lambda row: row[\"total\"], reverse=True)",
+        "example":"names = [\" Ada \", \"\", \"Grace\"]\nclean = [name.strip() for name in names if name.strip()]\nfor number, name in enumerate(clean, start=1):\n    print(number, name)",
+        "functions":["enumerate(items, start) — numbered iteration","zip(*iterables) — parallel iteration","sorted(items, key, reverse) — ordering","all/any(items) — aggregate conditions","iter/next — iterator protocol"],
+        "guidance":["Use a comprehension for one clear transformation or filter, not a multi-step algorithm.","A sorting key returns the value used for comparison.","zip stops at the shortest input unless itertools.zip_longest is used."],
+        "practice":"Sort expense dictionaries by amount, then print numbered category and amount rows.","projects":["expense","contacts","logs","api"]
+      },
+      {
+        "id":"files-pathlib","order":11,"level":"Intermediate","phase":"Files and structure","title":"Files, paths, and context managers","summary":"Read and write local files safely with pathlib and deterministic resource cleanup.",
+        "syntax":"from pathlib import Path\n\npath = Path(\"data\") / \"notes.txt\"\ntext = path.read_text(encoding=\"utf-8\")\npath.write_text(text + \"\\nDone\", encoding=\"utf-8\")\n\nwith path.open(encoding=\"utf-8\") as handle:\n    for line in handle:\n        print(line.rstrip())",
+        "example":"from pathlib import Path\n\nfor path in Path(\"inbox\").iterdir():\n    if path.is_file():\n        print(path.name, path.suffix.casefold())",
+        "functions":["open(path, mode, encoding) — file object","Path.exists/is_file/is_dir — inspect paths","Path.iterdir/glob/rglob — discover paths","Path.read_text/write_text — small text files","shutil.copy2/move — copy or move metadata-aware"],
+        "guidance":["Use explicit UTF-8 for portable text data.","Preview file operations before changing the filesystem.","Resolve name collisions and handle expected permission or missing-file errors."],
+        "practice":"List files in a chosen folder and print the move you would make without moving anything.","projects":["organiser","contacts","logs","api","capstone"]
+      },
+      {
+        "id":"exceptions","order":12,"level":"Intermediate","phase":"Files and structure","title":"Exceptions and validation","summary":"Distinguish expected failures, recover narrowly, and preserve useful error information.",
+        "syntax":"try:\n    value = int(raw)\nexcept ValueError as error:\n    print(f\"Invalid number: {error}\")\nelse:\n    use(value)\nfinally:\n    cleanup()",
+        "example":"def positive_amount(raw):\n    try:\n        amount = float(raw)\n    except ValueError as error:\n        raise ValueError(\"amount must be numeric\") from error\n    if amount <= 0:\n        raise ValueError(\"amount must be positive\")\n    return amount",
+        "functions":["isinstance(error, T) — inspect an exception type","raise Error(message) — signal failure","assert condition — internal invariant/debug aid","Exception.args — original exception arguments"],
+        "guidance":["Catch the narrowest exception you can actually handle.","Do not use bare except or silently discard failures.","Validate external input at boundaries and keep internal assumptions explicit."],
+        "practice":"Write a function that accepts positive numeric text and raises a helpful ValueError otherwise.","projects":["quiz","expense","organiser","contacts","logs","api","tasks","capstone"]
+      },
+      {
+        "id":"modules-cli","order":13,"level":"Intermediate","phase":"Files and structure","title":"Modules, imports, packages, and CLI arguments","summary":"Organize code into importable modules and provide a clear command-line entry point.",
+        "syntax":"# app.py\nfrom argparse import ArgumentParser\nfrom project.report import build_report\n\ndef main():\n    parser = ArgumentParser()\n    parser.add_argument(\"path\")\n    args = parser.parse_args()\n    print(build_report(args.path))\n\nif __name__ == \"__main__\":\n    main()",
+        "example":"# project/math_tools.py\ndef mean(values):\n    return sum(values) / len(values)\n\n# app.py\nfrom project.math_tools import mean\nprint(mean([2, 4, 6]))",
+        "functions":["__name__ — module execution identity","argparse.ArgumentParser — CLI parser","sys.argv — raw argument list","Path.cwd() — current directory","python -m package.module — module execution"],
+        "guidance":["Imports should not unexpectedly run the application.","Keep business logic independent of argparse so it is easy to test.","Prefer absolute imports within an application package."],
+        "practice":"Move one calculation into a module and call it from a main() function.","projects":["organiser","contacts","logs","api","tasks","capstone"]
+      },
+      {
+        "id":"json-csv","order":14,"level":"Intermediate","phase":"Data formats","title":"JSON and CSV persistence","summary":"Serialize structured data while validating types and handling malformed files.",
+        "syntax":"import json\n\nwith open(\"data.json\", encoding=\"utf-8\") as handle:\n    data = json.load(handle)\nwith open(\"data.json\", \"w\", encoding=\"utf-8\") as handle:\n    json.dump(data, handle, indent=2)",
+        "example":"import csv\n\nwith open(\"expenses.csv\", newline=\"\", encoding=\"utf-8\") as handle:\n    for row in csv.DictReader(handle):\n        print(row[\"category\"], float(row[\"amount\"]))",
+        "functions":["json.load/loads — decode JSON","json.dump/dumps — encode JSON","csv.DictReader — rows as dictionaries","csv.DictWriter — dictionaries to rows","JSONDecodeError — invalid JSON"],
+        "guidance":["JSON has a smaller type system than Python; dates and custom objects need an explicit representation.","Open CSV files with newline='' and an explicit encoding.","Validate required fields after decoding; parsing success does not guarantee correct data."],
+        "practice":"Save three contacts as JSON, reload them, and reject entries missing a name.","projects":["expense","contacts","api","capstone"]
+      },
+      {
+        "id":"classes","order":15,"level":"Intermediate","phase":"Objects","title":"Classes, instances, and composition","summary":"Bundle state with behavior when a domain concept has invariants or meaningful operations.",
+        "syntax":"class ContactBook:\n    def __init__(self):\n        self._contacts = []\n\n    def add(self, contact):\n        self._contacts.append(contact)\n\n    def find(self, name):\n        return [c for c in self._contacts if c.name == name]",
+        "example":"class Counter:\n    def __init__(self, start=0):\n        self.value = start\n\n    def increment(self):\n        self.value += 1\n        return self.value\n\ncounter = Counter()\nprint(counter.increment())",
+        "functions":["object() — base object","isinstance(obj, T) — runtime relationship","getattr/hasattr — dynamic attribute access","property — managed attribute","super() — cooperative parent access"],
+        "guidance":["Use a class when identity, invariants, and related operations belong together.","Prefer composition over inheritance unless the subtype relationship is genuine.","Keep I/O outside domain objects when possible."],
+        "practice":"Create a ContactBook that adds contacts and searches without printing inside its methods.","projects":["contacts","tasks","capstone"]
+      },
+      {
+        "id":"dataclasses","order":16,"level":"Intermediate","phase":"Objects","title":"Dataclasses, enums, and special methods","summary":"Create expressive data models with generated boilerplate and intentional representations.",
+        "syntax":"from dataclasses import dataclass, field\nfrom enum import Enum\n\nclass Status(Enum):\n    OPEN = \"open\"\n    DONE = \"done\"\n\n@dataclass(frozen=True)\nclass Task:\n    title: str\n    status: Status = Status.OPEN\n    tags: list[str] = field(default_factory=list)",
+        "example":"@dataclass(order=True)\nclass Expense:\n    amount: float\n    category: str\n\nprint(sorted([Expense(9, \"food\"), Expense(3, \"travel\")]))",
+        "functions":["@dataclass — generated model methods","field(default_factory=...) — safe mutable default","Enum — named choices","__repr__ — developer representation","__eq__/__lt__ — equality and ordering"],
+        "guidance":["Use default_factory for list, dict, and set fields.","Frozen dataclasses prevent attribute reassignment but do not deeply freeze nested objects.","Implement only special methods that give the object unsurprising Python behavior."],
+        "practice":"Model a task with title, status enum, and creation time, then sort a list of tasks.","projects":["contacts","tasks","capstone"]
+      },
+      {
+        "id":"debugging-testing","order":17,"level":"Intermediate","phase":"Quality","title":"Debugging, assertions, logging, and tests","summary":"Reproduce failures, isolate causes, and protect behavior with automated tests.",
+        "syntax":"import logging\nimport unittest\n\nlogging.basicConfig(level=logging.INFO)\n\nclass TestTotal(unittest.TestCase):\n    def test_empty_total_is_zero(self):\n        self.assertEqual(total([]), 0)\n\nif __name__ == \"__main__\":\n    unittest.main()",
+        "example":"def divide(total, count):\n    if count == 0:\n        raise ValueError(\"count cannot be zero\")\n    return total / count\n\n# A focused test states observable behavior.\nassert divide(10, 2) == 5",
+        "functions":["breakpoint() — enter debugger","logging.getLogger(name) — module logger","unittest.TestCase — test case base","assertRaises — expected exception","tempfile.TemporaryDirectory — isolated file tests"],
+        "guidance":["First make a failure repeatable with the smallest input.","Test public behavior rather than every implementation detail.","Use logging for operational information and exceptions for failure control flow."],
+        "practice":"Write tests for an empty total, a normal total, and one invalid input.","projects":["quiz","expense","organiser","contacts","logs","api","tasks","capstone"]
+      },
+      {
+        "id":"typing-docs","order":18,"level":"Intermediate","phase":"Quality","title":"Type hints, documentation, and refactoring","summary":"Communicate interfaces, improve editor feedback, and change structure without changing behavior.",
+        "syntax":"from collections.abc import Iterable\n\ndef average(values: Iterable[float]) -> float:\n    \"\"\"Return the arithmetic mean of non-empty values.\"\"\"\n    items = list(values)\n    if not items:\n        raise ValueError(\"values cannot be empty\")\n    return sum(items) / len(items)",
+        "example":"from typing import TypedDict\n\nclass ExpenseRow(TypedDict):\n    category: str\n    amount: float\n\ndef total(rows: list[ExpenseRow]) -> float:\n    return sum(row[\"amount\"] for row in rows)",
+        "functions":["list[str] / dict[str, int] — parameterized collections","T | None — optional value","Protocol — structural interface","TypedDict — dictionary shape","mypy/pyright — optional static checkers"],
+        "guidance":["Hints are documentation and tooling input; Python does not enforce most hints at runtime.","Add hints at module boundaries before annotating every local variable.","Refactor in small steps while tests stay green."],
+        "practice":"Add useful types and a docstring to three public project functions.","projects":["contacts","logs","api","tasks","capstone"]
+      },
+      {
+        "id":"iterators-generators","order":19,"level":"Advanced","phase":"Advanced core","title":"Iterators, generators, and lazy pipelines","summary":"Process streams one value at a time and understand the iterable/iterator protocol.",
+        "syntax":"def read_errors(lines):\n    for line in lines:\n        if \"ERROR\" in line:\n            yield line.rstrip()\n\nerrors = read_errors(open_lines())\nfirst = next(errors, None)",
+        "example":"def chunks(items, size):\n    chunk = []\n    for item in items:\n        chunk.append(item)\n        if len(chunk) == size:\n            yield chunk\n            chunk = []\n    if chunk:\n        yield chunk",
+        "functions":["iter(obj) — obtain iterator","next(iterator, default) — consume one value","yield — produce lazily","itertools.chain/islice — compose streams","itertools.groupby — group adjacent keys"],
+        "guidance":["An iterable can create an iterator; an iterator also remembers traversal state.","Generators are single-pass unless recreated.","Choose laziness for large or streaming data, not automatically for every list."],
+        "practice":"Write a generator that yields only warning and error log lines.","projects":["logs","api","capstone"]
+      },
+      {
+        "id":"decorators-context","order":20,"level":"Advanced","phase":"Advanced core","title":"Decorators, closures, and context managers","summary":"Wrap behavior and manage setup/cleanup without hiding program flow.",
+        "syntax":"from contextlib import contextmanager\nfrom functools import wraps\n\ndef traced(function):\n    @wraps(function)\n    def wrapper(*args, **kwargs):\n        print(function.__name__)\n        return function(*args, **kwargs)\n    return wrapper\n\n@contextmanager\ndef opened(path):\n    handle = open(path, encoding=\"utf-8\")\n    try:\n        yield handle\n    finally:\n        handle.close()",
+        "example":"def require_nonempty(function):\n    def wrapper(value):\n        if not value:\n            raise ValueError(\"value is required\")\n        return function(value)\n    return wrapper",
+        "functions":["functools.wraps — preserve wrapped metadata","contextlib.contextmanager — generator context manager","property — attribute decorator","classmethod/staticmethod — alternate method binding","callable — callable check"],
+        "guidance":["Use decorators for cross-cutting behavior with a stable, visible purpose.","A context manager guarantees cleanup around a with block.","Do not build abstractions that make simple control flow difficult to trace."],
+        "practice":"Create a timing context manager for one project operation.","projects":["logs","api","tasks","capstone"]
+      },
+      {
+        "id":"regex-dates","order":21,"level":"Advanced","phase":"Advanced core","title":"Regular expressions, dates, and time zones","summary":"Recognize structured text and represent dates without losing timezone meaning.",
+        "syntax":"import re\nfrom datetime import datetime, timezone\n\nmatch = re.fullmatch(r\"[A-Z]{3}-\\d{4}\", code)\nnow = datetime.now(timezone.utc)\nparsed = datetime.fromisoformat(\"2026-08-30T12:00:00+00:00\")",
+        "example":"pattern = re.compile(r\"^(?P<level>INFO|ERROR) \\[(?P<time>[^]]+)] (?P<message>.*)$\")\nmatch = pattern.match(line)\nif match:\n    print(match.groupdict())",
+        "functions":["re.compile/search/fullmatch — regex operations","Match.group/groupdict — captured data","datetime.now/fromisoformat — construct/parse","timedelta — duration","zoneinfo.ZoneInfo — named time zone"],
+        "guidance":["Use normal string methods when the pattern is simple.","Prefer raw strings for regex patterns.","Store timestamps with timezone information; convert for display at the edge."],
+        "practice":"Parse a timestamped ERROR log line into named fields.","projects":["logs","api","tasks","capstone"]
+      },
+      {
+        "id":"sqlite","order":22,"level":"Advanced","phase":"Data and automation","title":"SQLite and transactions","summary":"Persist relational data safely with parameterized SQL and explicit transactions.",
+        "syntax":"import sqlite3\n\nwith sqlite3.connect(\"tasks.db\") as connection:\n    connection.execute(\"CREATE TABLE IF NOT EXISTS task (id INTEGER PRIMARY KEY, title TEXT NOT NULL)\")\n    connection.execute(\"INSERT INTO task(title) VALUES (?)\", (title,))\n    rows = connection.execute(\"SELECT id, title FROM task ORDER BY id\").fetchall()",
+        "example":"def find_task(connection, task_id):\n    return connection.execute(\n        \"SELECT id, title, done FROM task WHERE id = ?\",\n        (task_id,),\n    ).fetchone()",
+        "functions":["sqlite3.connect — database connection","Connection.execute/executemany — parameterized commands","commit/rollback — transaction control","sqlite3.Row — named row access","PRAGMA foreign_keys — relationship enforcement"],
+        "guidance":["Never interpolate user values into SQL strings; bind parameters with ?.","Test with temporary databases or :memory:.","Keep schema changes explicit and versioned as the project grows."],
+        "practice":"Create a task table, insert two tasks, and query only incomplete tasks.","projects":["tasks","capstone"]
+      },
+      {
+        "id":"http-automation","order":23,"level":"Advanced","phase":"Data and automation","title":"HTTP APIs, fixtures, and automation boundaries","summary":"Separate transport, validation, transformation, and presentation so API code remains testable offline.",
+        "syntax":"import json\nfrom urllib.request import urlopen\n\ndef decode_response(payload: bytes) -> dict:\n    data = json.loads(payload.decode(\"utf-8\"))\n    if \"items\" not in data:\n        raise ValueError(\"missing items\")\n    return data\n\n# In tests: payload = Path(\"fixtures/response.json\").read_bytes()",
+        "example":"def summarize(payload):\n    return [item[\"name\"] for item in payload.get(\"items\", []) if item.get(\"active\") is True]",
+        "functions":["urllib.request.urlopen — standard HTTP client","json.loads — decode payload","subprocess.run — controlled external process","os.environ — configuration boundary","secrets — secure random tokens"],
+        "guidance":["Begin with saved response fixtures before making live requests.","Use timeouts and handle network, status, decoding, and schema failures separately.","Keep credentials out of source code, fixtures, logs, and version control."],
+        "practice":"Load an offline JSON fixture, validate required fields, and produce a summary.","projects":["api","capstone"]
+      },
+      {
+        "id":"concurrency","order":24,"level":"Advanced","phase":"Concurrency","title":"Threads, processes, futures, and queues","summary":"Choose concurrency for the workload, bound it, and collect failures explicitly.",
+        "syntax":"from concurrent.futures import ThreadPoolExecutor, as_completed\n\nwith ThreadPoolExecutor(max_workers=4) as executor:\n    futures = [executor.submit(load, path) for path in paths]\n    for future in as_completed(futures):\n        try:\n            print(future.result())\n        except Exception as error:\n            print(f\"failed: {error}\")",
+        "example":"from queue import Queue\nfrom threading import Thread\n\nwork = Queue()\n# Producers put bounded work in the queue; workers call task_done().",
+        "functions":["ThreadPoolExecutor — I/O-oriented worker pool","ProcessPoolExecutor — CPU-oriented worker pool","Future.result — value or exception","queue.Queue — thread-safe work queue","multiprocessing — separate processes"],
+        "guidance":["Threads help mainly with blocking I/O; processes can use multiple CPU cores.","Start with a correct sequential baseline and measure before adding concurrency.","Bound worker counts and define error, timeout, and shutdown behavior."],
+        "practice":"Process several local fixture files sequentially, then compare a bounded thread pool.","projects":["logs","api","capstone"]
+      },
+      {
+        "id":"async","order":25,"level":"Advanced","phase":"Concurrency","title":"Async functions, tasks, cancellation, and timeouts","summary":"Coordinate many cooperative I/O operations with an event loop and explicit lifecycle control.",
+        "syntax":"import asyncio\n\nasync def worker(name, delay):\n    await asyncio.sleep(delay)\n    return name\n\nasync def main():\n    async with asyncio.TaskGroup() as group:\n        tasks = [group.create_task(worker(str(i), .1)) for i in range(3)]\n    print([task.result() for task in tasks])\n\nasyncio.run(main())",
+        "example":"async def bounded_call(semaphore, operation):\n    async with semaphore:\n        async with asyncio.timeout(5):\n            return await operation()",
+        "functions":["asyncio.run — application entry","await — suspend until awaitable completes","create_task/TaskGroup — schedule tasks","asyncio.timeout — deadline context","Semaphore — concurrency limit"],
+        "guidance":["Async does not make CPU-heavy work faster.","Never call blocking I/O directly on the event loop.","Design cancellation and cleanup as normal control flow, not rare accidents."],
+        "practice":"Run three simulated I/O tasks concurrently, then add a timeout and one handled failure.","projects":["api","capstone"]
+      },
+      {
+        "id":"capstone-design","order":26,"level":"Advanced","phase":"Capstone","title":"Architecture, packaging, and project delivery","summary":"Turn a small vertical slice into a maintainable application with clear boundaries and reproducible setup.",
+        "syntax":"project/\n├── pyproject.toml\n├── src/project/\n│   ├── __init__.py\n│   ├── domain.py\n│   ├── storage.py\n│   └── cli.py\n├── tests/\n└── README.md",
+        "example":"# Keep dependencies pointing inward:\n# CLI -> application service -> domain\n# storage adapter implements a small interface\n# tests replace external boundaries with fixtures/fakes",
+        "functions":["venv — isolated environment","pip — dependency installer","pyproject.toml — project metadata","__all__ — public module surface","importlib.resources — packaged data"],
+        "guidance":["Start with one end-to-end feature before building infrastructure.","Keep persistence, network, clock, and user input at replaceable boundaries.","Document setup, commands, decisions, limitations, and next steps."],
+        "practice":"Write a one-page capstone brief with user, problem, smallest feature, data model, and acceptance test.","projects":["capstone"]
+      }
+    ],
+    "builtins": [
+      {"category":"Input, output, and discovery","items":["print(*values, sep=' ', end='\\n') — display output","input(prompt) — read text","open(path, mode, encoding) — open a file","help(object) — built-in documentation","dir(object) — available attributes","breakpoint() — debugger entry"]},
+      {"category":"Types and constructors","items":["bool, int, float, complex, str — scalar conversions","bytes, bytearray, memoryview — binary data","list, tuple, dict, set, frozenset — collections","range, slice — sequence helpers","object — base object"]},
+      {"category":"Aggregation and ordering","items":["len, sum, min, max — aggregate collections","sorted, reversed — ordering","all, any — combine conditions","abs, round, pow, divmod — numeric operations"]},
+      {"category":"Iteration","items":["iter, next — iterator protocol","enumerate — index with values","zip — parallel iteration","map, filter — lazy transformation/selection"]},
+      {"category":"Representation","items":["format, repr, ascii — textual representations","bin, oct, hex — integer bases","chr, ord — Unicode conversion"]},
+      {"category":"Inspection and attributes","items":["type, isinstance, issubclass — type relationships","callable — callable check","id, hash — identity and hashing","getattr, setattr, delattr, hasattr — attributes","vars, globals, locals — namespaces"]},
+      {"category":"Object model and advanced","items":["super — cooperative parent access","property — managed attribute","classmethod, staticmethod — method binding","compile, eval, exec, __import__ — dynamic execution; avoid untrusted input"]}
+    ],
+    "stdlib": [
+      {"category":"Paths and system","items":["pathlib — object-oriented paths","os / sys — operating-system and interpreter boundaries","shutil — high-level file operations","tempfile — isolated temporary resources","subprocess — controlled external commands","argparse — command-line interfaces","venv — virtual environments"]},
+      {"category":"Data and modelling","items":["json / csv — common interchange formats","sqlite3 — embedded relational database","dataclasses — concise data models","typing — type contracts","enum — named choices","collections — specialized containers","copy / pprint — copying and readable display"]},
+      {"category":"Algorithms and numbers","items":["math / statistics — numeric tools","decimal / fractions — exact numeric models","random / secrets — simulation versus security","itertools — iterator building blocks","functools — function utilities","operator — operator functions"]},
+      {"category":"Text and time","items":["re — regular expressions","string / textwrap — text helpers","datetime / time — dates and clocks","zoneinfo — IANA time zones"]},
+      {"category":"Reliability and structure","items":["logging / traceback — diagnostics","unittest / doctest — testing","contextlib — context-manager helpers","abc — abstract interfaces","importlib.resources — packaged resources"]},
+      {"category":"Networking and persistence","items":["urllib / http — HTTP foundations","email — email messages","socket — low-level networking","hashlib / hmac — hashes and authentication","configparser — INI configuration"]},
+      {"category":"Concurrency","items":["threading — shared-process threads","multiprocessing — separate processes","concurrent.futures — worker pools","queue — synchronized queues","asyncio — cooperative async I/O"]}
+    ]
+  }
+  </script>
+
   <script>
     "use strict";
     const STORE="learn-python-projects:dashboard:v1",THEME="python-dashboard-theme",TAB="python-dashboard-tab";
@@ -137,9 +388,10 @@
     const storage={get:key=>{try{return localStorage.getItem(key)}catch{return null}},set:(key,value)=>{try{localStorage.setItem(key,value);return true}catch{return false}},remove:key=>{try{localStorage.removeItem(key)}catch{}}};
     const states=new Set(["introduced","practised","independent","revisit","locked","available","current","complete","planned","active","paused","ready"]),stateClass=value=>states.has(String(value))?String(value):"";
     let defaults;try{defaults=JSON.parse(byId("learning-data").textContent)}catch(error){defaults={version:1,learner:{},current:{},mastery:[],phases:[],projects:[],sessions:[],scratchpad:""};console.error("Dashboard data could not be parsed.",error)}
+    let knowledge;try{knowledge=JSON.parse(byId("knowledge-data").textContent)}catch(error){knowledge={lessons:[],builtins:[],stdlib:[]};console.error("Python knowledge library could not be parsed.",error)}
     const clone=value=>JSON.parse(JSON.stringify(value));
     function normalize(candidate){const value=candidate&&typeof candidate==="object"?clone(candidate):clone(defaults);value.version=1;value.learner={...clone(defaults.learner||{}),...(value.learner||{})};value.current={...clone(defaults.current||{}),...(value.current||{})};value.mastery=arr(value.mastery);value.phases=arr(value.phases).length?value.phases:clone(defaults.phases||[]);value.projects=(arr(value.projects).length?value.projects:clone(defaults.projects||[])).map(project=>({...project,tasks:arr(project.tasks),completedTasks:arr(project.completedTasks)}));value.sessions=arr(value.sessions);value.scratchpad=text(value.scratchpad,"");return value}
-    let data=normalize(defaults);const saved=storage.get(STORE);if(saved){try{const parsed=JSON.parse(saved);if(parsed?.version===1)data=normalize(parsed)}catch{console.warn("Saved dashboard data was invalid and was ignored.")}}
+    let data=normalize(defaults),selectedLessonId="start";const saved=storage.get(STORE);if(saved){try{const parsed=JSON.parse(saved);if(parsed?.version===1)data=normalize(parsed)}catch{console.warn("Saved dashboard data was invalid and was ignored.")}}
 
     let toastTimer;function toast(message){const node=byId("toast");node.textContent=message;node.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>node.hidden=true,2800)}
     function persist(message){data.savedAt=new Date().toISOString();const ok=storage.set(STORE,JSON.stringify(data));renderAll();if(message)toast(ok?message:`${message} Browser storage was unavailable; export a backup.`)}
@@ -152,12 +404,64 @@
     function renderHeader(){byId("phase-label").textContent=text(data.learner.phase,"Adaptive Python path");byId("page-title").textContent=text(data.current.project,"Build, test, understand.");byId("project-purpose").textContent=text(data.current.purpose,"Set up your path, then work through one project step at a time.");byId("next-step").textContent=text(data.current.nextStep,"Complete placement.");byId("primary-action").textContent=data.learner.onboardingComplete?"Continue project":"Set up my path";const count=totals(),progress=count.all?Math.round(count.done/count.all*100):0;byId("progress-text").textContent=`${progress}%`;byId("progress-bar").style.width=`${progress}%`;byId("progress-bar").parentElement.setAttribute("aria-valuenow",String(progress))}
     function renderOverview(){const count=totals();byId("stat-tasks").textContent=count.done;byId("stat-concepts").textContent=data.mastery.length;byId("stat-projects").textContent=data.projects.filter(item=>item.status==="complete").length;const current=byId("current-project");current.replaceChildren();meta(current,"Status",data.current.status);meta(current,"Last command",data.current.lastCommand);meta(current,"Last result",data.current.lastResult);const learner=byId("learner-setup");learner.replaceChildren();meta(learner,"Goal",data.learner.goal);meta(learner,"Phase",data.learner.phase);meta(learner,"Session",data.learner.sessionLength);meta(learner,"Interpreter",data.learner.interpreter);renderMastery()}
     function renderMastery(){const node=byId("mastery-list"),filter=byId("mastery-filter").value,items=filter==="all"?data.mastery:data.mastery.filter(item=>item.state===filter);node.replaceChildren();if(!items.length){node.append(empty(filter==="all"?"No reviewed mastery evidence yet. Complete work, run it, and ask your coach for a code review.":`No concepts marked ${filter}.`));return}items.forEach(item=>{const card=el("article","item"),head=el("div","item-head");head.append(el("h3","",item.concept),el("span",`badge ${stateClass(item.state)}`,item.state));card.append(head,el("p","",item.evidence),el("p","muted",`Last practised: ${text(item.lastPractised)}`));node.append(card)})}
-    function renderPractice(){const project=projectById(),list=byId("practice-tasks");list.replaceChildren();if(document.activeElement!==byId("scratchpad"))byId("scratchpad").value=data.scratchpad;if(!project){byId("practice-title").textContent="Complete placement to begin";byId("practice-purpose").textContent="Your recommended project and checklist will appear here.";list.append(empty("Use “Set up my path” above to choose a starting project."));byId("finish-project").disabled=true;byId("copy-brief").disabled=true;return}byId("practice-title").textContent=project.name;byId("practice-purpose").textContent=project.purpose;project.tasks.forEach((task,index)=>{const item=el("li"),label=el("label"),input=document.createElement("input");input.type="checkbox";input.checked=project.completedTasks.includes(task);input.setAttribute("aria-label",`Task ${index+1}: ${task}`);input.addEventListener("change",()=>{if(input.checked&&!project.completedTasks.includes(task))project.completedTasks.push(task);if(!input.checked)project.completedTasks=project.completedTasks.filter(value=>value!==task);data.current.nextStep=project.tasks.find(value=>!project.completedTasks.includes(value))||"Review your work, run the agreed checks, and record the result.";persist("Task progress saved locally.")});label.append(input,el("span","",task));item.append(label);list.append(item)});const allDone=project.tasks.length&&project.tasks.every(task=>project.completedTasks.includes(task)),reviewed=["ready","complete"].includes(project.status);byId("finish-project").disabled=!allDone||reviewed;byId("finish-project").textContent=project.status==="complete"?"Project marked complete":project.status==="ready"?"Ready for review":"Mark ready for review";byId("copy-brief").disabled=false}
+    function openLesson(id){
+      selectedLessonId=id;
+      activateTab(byId("tab-learn"));
+      renderKnowledge();
+      byId("lesson-view").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+    function lessonSearchText(lesson){return [lesson.title,lesson.summary,lesson.phase,lesson.level,...arr(lesson.functions),...arr(lesson.guidance),...arr(lesson.projects)].join(" ").toLocaleLowerCase()}
+    function filteredLessons(){
+      const query=byId("lesson-search").value.trim().toLocaleLowerCase(),level=byId("lesson-level").value,project=byId("lesson-project").value;
+      return knowledge.lessons.filter(lesson=>(level==="all"||lesson.level===level)&&(project==="all"||lesson.projects.includes(project))&&(!query||lessonSearchText(lesson).includes(query))).sort((a,b)=>a.order-b.order)
+    }
+    function renderReference(containerId,groups,query){
+      const node=byId(containerId);node.replaceChildren();
+      groups.forEach(group=>{
+        const items=arr(group.items).filter(item=>!query||`${group.category} ${item}`.toLocaleLowerCase().includes(query));
+        if(!items.length)return;
+        const card=el("section","reference-group"),list=el("ul");card.append(el("h3","",group.category));items.forEach(item=>list.append(el("li","",item)));card.append(list);node.append(card)
+      });
+      if(!node.children.length)node.append(empty("No reference entries match this search."))
+    }
+    function renderLessonDetail(lesson,visible){
+      const node=byId("lesson-view");node.replaceChildren();
+      if(!lesson){node.append(empty("No lesson matches these filters. Try a broader search."));return}
+      const heading=el("div","item-head");heading.append(el("div","",lesson.phase),el("span","badge",lesson.level));
+      node.append(heading,el("h2","",lesson.title),el("p","muted",lesson.summary));
+      const syntax=el("section","lesson-section");syntax.append(el("h3","","Syntax pattern"),el("pre","code-block",lesson.syntax));
+      const example=el("section","lesson-section");example.append(el("h3","","Example"),el("pre","code-block",lesson.example));
+      const copyExample=button("Copy example",()=>copy(lesson.example,"Example copied.",null));example.append(copyExample);
+      const functions=el("section","lesson-section"),functionGrid=el("div","function-grid");functions.append(el("h3","","Functions and APIs to know"));lesson.functions.forEach(item=>functionGrid.append(el("div","function-item",item)));functions.append(functionGrid);
+      const guidance=el("section","lesson-section"),guidanceList=el("ul","guidance-list");guidance.append(el("h3","","Guidelines and common pitfalls"));lesson.guidance.forEach(item=>guidanceList.append(el("li","",item)));guidance.append(guidanceList);
+      const practice=el("section","lesson-section notice");practice.append(el("strong","","Try it yourself"),el("p","",lesson.practice));
+      const navigation=el("div","actions lesson-section"),index=visible.findIndex(item=>item.id===lesson.id);
+      if(index>0)navigation.append(button("Previous lesson",()=>openLesson(visible[index-1].id)));
+      if(index<visible.length-1)navigation.append(button("Next lesson",()=>openLesson(visible[index+1].id)));
+      node.append(syntax,example,functions,guidance,practice,navigation)
+    }
+    function renderKnowledge(){
+      const visible=filteredLessons(),list=byId("lesson-list"),query=byId("lesson-search").value.trim().toLocaleLowerCase();list.replaceChildren();
+      if(!visible.some(lesson=>lesson.id===selectedLessonId))selectedLessonId=visible[0]?.id||"";
+      visible.forEach(lesson=>{const link=el("button","lesson-link");link.type="button";link.setAttribute("aria-current",String(lesson.id===selectedLessonId));link.append(el("strong","",lesson.title),el("small","",`${lesson.level} · ${lesson.phase}`));link.addEventListener("click",()=>openLesson(lesson.id));list.append(link)});
+      if(!visible.length)list.append(empty("No lessons found."));
+      renderLessonDetail(visible.find(lesson=>lesson.id===selectedLessonId),visible);
+      renderReference("builtin-reference",knowledge.builtins,query);renderReference("stdlib-reference",knowledge.stdlib,query)
+    }
+    function renderProjectLearning(project){
+      const node=byId("project-learning-path");node.replaceChildren();
+      if(!project){node.append(el("p","muted","Complete placement to get a recommended learning path."));return}
+      const lessons=knowledge.lessons.filter(lesson=>lesson.projects.includes(project.id)).sort((a,b)=>a.order-b.order);
+      node.append(el("h3","",`Learn first · ${lessons.length} connected lessons`),el("p","muted","Open only the lesson needed for your next project step."));
+      lessons.slice(0,6).forEach(lesson=>{const link=el("button","lesson-link");link.type="button";link.append(el("strong","",lesson.title),el("small","",`${lesson.level} · syntax, example, and practice`));link.addEventListener("click",()=>{byId("lesson-search").value="";byId("lesson-level").value="all";byId("lesson-project").value=project.id;openLesson(lesson.id)});node.append(link)});
+      if(lessons.length>6)node.append(button(`View all ${lessons.length} project lessons`,()=>{byId("lesson-search").value="";byId("lesson-level").value="all";byId("lesson-project").value=project.id;openLesson(lessons[0].id)}))
+    }
+    function renderPractice(){const project=projectById(),list=byId("practice-tasks");list.replaceChildren();renderProjectLearning(project);if(document.activeElement!==byId("scratchpad"))byId("scratchpad").value=data.scratchpad;if(!project){byId("practice-title").textContent="Complete placement to begin";byId("practice-purpose").textContent="Your recommended project and checklist will appear here.";list.append(empty("Use “Set up my path” above to choose a starting project."));byId("finish-project").disabled=true;byId("copy-brief").disabled=true;return}byId("practice-title").textContent=project.name;byId("practice-purpose").textContent=project.purpose;project.tasks.forEach((task,index)=>{const item=el("li"),label=el("label"),input=document.createElement("input");input.type="checkbox";input.checked=project.completedTasks.includes(task);input.setAttribute("aria-label",`Task ${index+1}: ${task}`);input.addEventListener("change",()=>{if(input.checked&&!project.completedTasks.includes(task))project.completedTasks.push(task);if(!input.checked)project.completedTasks=project.completedTasks.filter(value=>value!==task);data.current.nextStep=project.tasks.find(value=>!project.completedTasks.includes(value))||"Review your work, run the agreed checks, and record the result.";persist("Task progress saved locally.")});label.append(input,el("span","",task));item.append(label);list.append(item)});const allDone=project.tasks.length&&project.tasks.every(task=>project.completedTasks.includes(task)),reviewed=["ready","complete"].includes(project.status);byId("finish-project").disabled=!allDone||reviewed;byId("finish-project").textContent=project.status==="complete"?"Project marked complete":project.status==="ready"?"Ready for review":"Mark ready for review";byId("copy-brief").disabled=false}
     function renderPhases(){const node=byId("phase-list");node.replaceChildren();data.phases.forEach(phase=>{const details=el("details","phase");if(phase.status==="current")details.open=true;const summary=el("summary");summary.append(el("span","",`Phase ${phase.number} · ${phase.title}`),el("span",`badge ${stateClass(phase.status)}`,phase.status));const body=el("div","phase-body"),topics=el("ul","topic-list");arr(phase.topics).forEach(topic=>topics.append(el("li","",topic)));body.append(topics);const project=data.projects.find(item=>item.phase===phase.number);if(project)body.append(el("p","",`Project: ${project.name} — ${project.purpose}`));details.append(summary,body);node.append(details)})}
     function activateProject(id){const project=projectById(id);if(!project)return;data.projects.forEach(item=>{if(item.status==="active"&&item.id!==id)item.status="paused"});if(["planned","paused"].includes(project.status))project.status="active";data.phases.forEach(phase=>{if(phase.number===project.phase)phase.status="current";else if(phase.status==="current")phase.status="available"});const phase=data.phases.find(item=>item.number===project.phase);data.learner.phase=phase?`Phase ${phase.number} · ${phase.title}`:data.learner.phase;data.current={projectId:project.id,project:project.name,purpose:project.purpose,status:project.status,nextStep:project.tasks.find(task=>!project.completedTasks.includes(task))||"Review and verify the project.",lastCommand:data.current.lastCommand||"",lastResult:data.current.lastResult||""};persist(`${project.name} is now active.`);activateTab(byId("tab-practice"));byId("panel-practice").scrollIntoView({behavior:"smooth",block:"start"})}
-    function renderProjects(){const node=byId("project-list");node.replaceChildren();data.projects.forEach(project=>{const card=el("article","item"),head=el("div","item-head");head.append(el("h3","",project.name),el("span",`badge ${stateClass(project.status)}`,project.status));card.append(head,el("p","",project.purpose),el("p","",`Concepts: ${project.concepts.join(", ")}`),el("p","",`Tasks: ${project.completedTasks.length}/${project.tasks.length} · Verification: ${text(project.verification)}`));card.append(button(project.id===data.current.projectId?"Continue":project.status==="planned"?"Start project":"Open project",()=>activateProject(project.id)));node.append(card)})}
+    function renderProjects(){const node=byId("project-list");node.replaceChildren();data.projects.forEach(project=>{const card=el("article","item"),head=el("div","item-head");head.append(el("h3","",project.name),el("span",`badge ${stateClass(project.status)}`,project.status));card.append(head,el("p","",project.purpose),el("p","",`Concepts: ${project.concepts.join(", ")}`),el("p","",`Tasks: ${project.completedTasks.length}/${project.tasks.length} · Verification: ${text(project.verification)}`));const actions=el("div","actions");actions.append(button(project.id===data.current.projectId?"Continue":project.status==="planned"?"Start project":"Open project",()=>activateProject(project.id)),button("Learn what you need",()=>{byId("lesson-search").value="";byId("lesson-level").value="all";byId("lesson-project").value=project.id;selectedLessonId=knowledge.lessons.find(lesson=>lesson.projects.includes(project.id))?.id||"start";openLesson(selectedLessonId)}));card.append(actions);node.append(card)})}
     function renderSessions(){const node=byId("session-list");node.replaceChildren();if(!data.sessions.length){node.append(empty("No session notes yet. Save one from Practice after you work on code."));return}[...data.sessions].reverse().forEach(session=>{const card=el("article","item"),head=el("div","item-head");head.append(el("h3","",session.outcome),el("span","badge",session.date));card.append(head,el("p","",`Verification: ${text(session.verification)}`),el("p","",`Next: ${text(session.next)}`));node.append(card)})}
-    function renderAll(){renderHeader();renderOverview();renderPractice();renderPhases();renderProjects();renderSessions();byId("saved-at").textContent=data.savedAt?new Date(data.savedAt).toLocaleString():"not yet"}
+    function renderAll(){renderHeader();renderOverview();renderKnowledge();renderPractice();renderPhases();renderProjects();renderSessions();byId("saved-at").textContent=data.savedAt?new Date(data.savedAt).toLocaleString():"not yet"}
 
     function activateTab(tab){if(!tab)return;document.querySelectorAll('[role="tab"]').forEach(candidate=>{const selected=candidate===tab;candidate.setAttribute("aria-selected",selected);candidate.tabIndex=selected?0:-1;byId(candidate.getAttribute("aria-controls")).hidden=!selected});storage.set(TAB,tab.id)}
     const tabs=[...document.querySelectorAll('[role="tab"]')];tabs.forEach((tab,index)=>{tab.addEventListener("click",()=>activateTab(tab));tab.addEventListener("keydown",event=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;event.preventDefault();let target=index;if(event.key==="ArrowLeft")target=(index-1+tabs.length)%tabs.length;if(event.key==="ArrowRight")target=(index+1)%tabs.length;if(event.key==="Home")target=0;if(event.key==="End")target=tabs.length-1;activateTab(tabs[target]);tabs[target].focus()})});
@@ -171,6 +475,10 @@
     function resetData(){if(!confirm("Reset all locally saved dashboard progress? Export first if you need a backup."))return;storage.remove(STORE);data=normalize(defaults);renderAll();toast("Local dashboard progress reset.")}
     function setTheme(value){const theme=value==="dark"?"dark":"light";document.documentElement.dataset.theme=theme;byId("theme-toggle").textContent=theme==="dark"?"Light theme":"Dark theme";storage.set(THEME,theme)}
 
+    data.projects.forEach(project=>{const option=el("option","",project.name);option.value=project.id;byId("lesson-project").append(option)});
+    const functionCount=knowledge.builtins.reduce((count,group)=>count+group.items.length,0),moduleCount=knowledge.stdlib.reduce((count,group)=>count+group.items.length,0);
+    byId("repository-stats").append(el("span","",`${knowledge.lessons.length} guided lessons`),el("span","",`${functionCount} built-in reference entries`),el("span","",`${moduleCount} standard-library reference entries`),el("span","","Beginner → advanced"));
+    byId("lesson-search").addEventListener("input",renderKnowledge);byId("lesson-level").addEventListener("change",renderKnowledge);byId("lesson-project").addEventListener("change",renderKnowledge);
     byId("mastery-filter").addEventListener("change",renderMastery);byId("copy-next").addEventListener("click",()=>copy(text(data.current.nextStep,"Complete placement."),"Next step copied.",byId("copy-status")));byId("primary-action").addEventListener("click",()=>data.learner.onboardingComplete?activateProject(data.current.projectId):openSetup());byId("edit-setup").addEventListener("click",openSetup);byId("close-setup").addEventListener("click",()=>byId("setup-dialog").close());
     byId("setup-form").addEventListener("submit",()=>{data.learner.goal=byId("setup-goal").value.trim();data.learner.experience=byId("setup-experience").value;data.learner.sessionLength=byId("setup-duration").value;data.learner.interpreter=byId("setup-interpreter").value;data.learner.onboardingComplete=true;place(data.learner.experience);persist("Learning path created and saved locally.");setTimeout(()=>activateTab(byId("tab-practice")),0)});
     byId("finish-project").addEventListener("click",finishProject);byId("copy-brief").addEventListener("click",()=>{const project=projectById();if(project)copy(`${project.name}\n\n${project.purpose}\n\nRequirements:\n${project.tasks.map((task,index)=>`${index+1}. ${task}`).join("\n")}`,"Project brief copied.",byId("practice-status"))});

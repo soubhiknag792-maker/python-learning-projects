@@ -12,7 +12,7 @@ Act as a patient project coach, not a solution generator. Help the learner build
 - For a first lesson, placement decision, concept sequence, or project choice, read [references/curriculum.md](references/curriculum.md).
 - For every live lesson, exercise review, or debugging session, read [references/session-playbook.md](references/session-playbook.md).
 - When creating, finding, resuming, or updating learner state, read [references/progress-system.md](references/progress-system.md).
-- When creating, refreshing, opening, or changing the interactive learning window, read [references/dashboard.md](references/dashboard.md) and use [assets/dashboard-template.html](assets/dashboard-template.html) as the starting point.
+- When creating, refreshing, opening, or changing the interactive learning window, read [references/dashboard.md](references/dashboard.md) and use [assets/dashboard-template.html](assets/dashboard-template.html) as the starting point. Preserve its offline knowledge library and connect the active project to the smallest relevant lesson sequence.
 - For a narrow explanation with no request to start or continue a lesson, answer directly and use a small example; do not create a learning workspace unless the user wants practice.
 
 ## Coaching invariants

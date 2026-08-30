@@ -11,7 +11,7 @@ Generate a self-contained browser window at `python-learning-workspace/dashboard
 
 ## Output contract
 
-Copy the template to the learning workspace and replace the entire contents of the `learning-data` JSON script element with current serialized data matching this shape:
+Copy the template to the learning workspace and replace the entire contents of the `learning-data` JSON script element with current serialized data matching this shape. Preserve the separate `knowledge-data` element: it is the offline beginner-to-advanced lesson, built-in, and standard-library repository shared by all learners.
 
 ```json
 {
@@ -84,7 +84,10 @@ Serialize data as JSON rather than interpolating it into markup or JavaScript. E
 
 The generated page must remain a single portable HTML file and work from `file://` without a server. Preserve these template behaviors:
 
-- Overview, Practice, Curriculum, Projects, and Sessions tabs with keyboard navigation.
+- Overview, Learn, Practice, Curriculum, Projects, and Sessions tabs with keyboard navigation.
+- A searchable and level-filterable Python lesson repository containing syntax patterns, small examples, key functions/APIs, pitfalls, and practice prompts.
+- Project-specific “Learn what you need” paths that connect each build to its prerequisite lessons without revealing a complete project solution.
+- Searchable built-in-function and standard-library quick references that remain useful offline.
 - Overall curriculum progress and mastery counts.
 - A mastery-state filter.
 - Expandable curriculum phase cards.
@@ -94,7 +97,7 @@ The generated page must remain a single portable HTML file and work from `file:/
 - Light/dark theme choice stored in browser `localStorage`.
 - Responsive layout, visible focus states, semantic landmarks, reduced-motion support, and useful empty states.
 
-Do not add analytics, remote fonts, CDNs, network requests, credentials, executable learner code, or third-party scripts. The page must never claim that clicking a control updates `progress.md` or verifies Python behavior.
+Do not add analytics, remote fonts, CDNs, network requests, credentials, an in-browser Python runtime, or third-party scripts. Lesson examples are readable reference snippets only. The page must never claim that clicking a control updates `progress.md` or verifies Python behavior.
 
 The browser may store a non-authoritative working copy of checklist state, scratch notes, setup choices, and session drafts. Label these changes as local, keep verified mastery separate, and require coach review plus real command/test evidence before copying them into `progress.md`. A generated dashboard may merge exported browser JSON only after reviewing it against the learner's files and journal.
 
@@ -103,10 +106,10 @@ The browser may store a non-authoritative working copy of checklist state, scrat
 After generation:
 
 1. Confirm the file exists outside the skill directory.
-2. Parse the embedded JSON and check that required top-level keys exist.
+2. Parse both embedded JSON elements, check required top-level keys, and confirm each project maps to at least one lesson.
 3. Check the inline JavaScript for syntax errors when a JavaScript runtime is available.
 4. Open the local file in the available browser or HTML preview. If opening is unavailable, provide a clickable file link.
-5. Verify tab switching, keyboard focus, theme toggle, placement, task persistence, scratchpad persistence, session capture, mastery filter, phase expansion, copy actions, JSON export/import, and confirmed reset.
+5. Verify lesson search, level and project filters, lesson navigation, project-to-lesson links, copy-example, tab switching, keyboard focus, theme toggle, placement, task persistence, scratchpad persistence, session capture, mastery filter, phase expansion, copy actions, JSON export/import, and confirmed reset.
 6. Confirm there are no required network requests or console errors.
 
 If visual or interaction verification fails, keep the journal untouched, correct only the generated dashboard, and rerun the checks.
