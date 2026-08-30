@@ -7,564 +7,175 @@
   <title>Learn Python with Projects</title>
   <style>
     :root {
-      --page: #f4f7fb;
-      --surface: #ffffff;
-      --surface-soft: #eef4ff;
-      --text: #14213d;
-      --topbar-text: #14213d;
-      --muted: #5b6984;
-      --line: #dce4f0;
-      --accent: #3b5ccc;
-      --accent-strong: #2946ad;
-      --success: #087f5b;
-      --warning: #b25c00;
-      --danger: #b42318;
-      --shadow: 0 18px 50px rgba(37, 55, 92, 0.10);
-      --radius: 18px;
+      --page:#f4f7fb;--surface:#fff;--soft:#eef4ff;--text:#14213d;--topbar-text:#14213d;
+      --muted:#5b6984;--line:#dce4f0;--accent:#3b5ccc;--accent-strong:#2946ad;
+      --success:#087f5b;--warning:#b25c00;--danger:#b42318;
+      --shadow:0 18px 50px rgba(37,55,92,.10);--radius:18px
     }
-
     html[data-theme="dark"] {
-      --page: #0f172a;
-      --surface: #172033;
-      --surface-soft: #202b42;
-      --text: #edf2ff;
-      --topbar-text: #f9ebff;
-      --muted: #afbdd3;
-      --line: #33415c;
-      --accent: #9db3ff;
-      --accent-strong: #c3d0ff;
-      --success: #6ee7b7;
-      --warning: #fdba74;
-      --danger: #fda4af;
-      --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+      --page:#0f172a;--surface:#172033;--soft:#202b42;--text:#edf2ff;--topbar-text:#f9ebff;
+      --muted:#afbdd3;--line:#33415c;--accent:#9db3ff;--accent-strong:#c3d0ff;
+      --success:#6ee7b7;--warning:#fdba74;--danger:#fda4af;--shadow:0 18px 50px rgba(0,0,0,.28)
     }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at 15% 0%, rgba(89, 121, 240, 0.16), transparent 34rem),
-        var(--page);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.55;
-    }
-
-    button, select { font: inherit; }
-
-    button:focus-visible,
-    select:focus-visible,
-    summary:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    .shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 24px 0 16px;
-      color: var(--topbar-text);
-    }
-
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .logo {
-      display: grid;
-      width: 44px;
-      height: 44px;
-      place-items: center;
-      border-radius: 14px;
-      background: var(--accent);
-      color: var(--page);
-      font-family: system-ui, sans-serif;
-      font-weight: 900;
-      box-shadow: var(--shadow);
-    }
-
-    .brand strong { display: block; font-size: 1rem; }
-    .brand span { color: var(--muted); font-size: 0.84rem; }
-
-    .button {
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--surface);
-      color: var(--text);
-      cursor: pointer;
-      padding: 10px 14px;
-      transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
-    }
-
-    .button:hover { border-color: var(--accent); transform: translateY(-1px); }
-    .button.primary { border-color: var(--accent); background: var(--accent); color: var(--page); font-weight: 750; }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.65fr) minmax(260px, 0.85fr);
-      gap: 20px;
-      padding: 34px;
-      border: 1px solid var(--line);
-      border-radius: 26px;
-      background: var(--surface);
-      box-shadow: var(--shadow);
-    }
-
-    .eyebrow {
-      margin: 0 0 8px;
-      color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    h1 { margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.04; letter-spacing: -0.045em; }
-    .lede { max-width: 680px; margin: 16px 0 0; color: var(--muted); font-size: 1.02rem; }
-
-    .next-card {
-      align-self: stretch;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface-soft);
-    }
-
-    .next-card h2 { margin: 0 0 8px; font-size: 1rem; }
-    .next-card p { margin: 0 0 16px; }
-    .copy-status { min-height: 1.4em; margin-top: 8px; color: var(--muted); font-size: 0.82rem; }
-
-    .progress-wrap { margin-top: 26px; }
-    .progress-label { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; color: var(--muted); font-size: 0.9rem; }
-    .progress-track { height: 12px; overflow: hidden; border-radius: 999px; background: var(--line); }
-    .progress-bar { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--success)); transition: width 350ms ease; }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      margin: 24px 0 18px;
-      padding: 6px;
-      overflow-x: auto;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--surface);
-    }
-
-    .tab {
-      min-width: max-content;
-      border: 0;
-      border-radius: 11px;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 10px 16px;
-      font-weight: 700;
-    }
-
-    .tab[aria-selected="true"] { background: var(--surface-soft); color: var(--accent-strong); }
-    [role="tabpanel"][hidden] { display: none; }
-
-    .panel { padding-bottom: 34px; }
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
-    .card { grid-column: span 4; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: 0 8px 30px rgba(35, 55, 90, 0.05); }
-    .card.wide { grid-column: span 8; }
-    .card.full { grid-column: 1 / -1; }
-    .card h2, .card h3 { margin-top: 0; }
-    .card p:last-child { margin-bottom: 0; }
-    .stat { margin: 4px 0 0; font-size: 2rem; font-weight: 850; letter-spacing: -0.04em; }
-    .muted { color: var(--muted); }
-
-    .meta-list { display: grid; gap: 10px; margin: 0; }
-    .meta-row { display: grid; grid-template-columns: 130px 1fr; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
-    .meta-row:last-child { padding-bottom: 0; border-bottom: 0; }
-    .meta-row dt { color: var(--muted); }
-    .meta-row dd { margin: 0; font-weight: 650; overflow-wrap: anywhere; }
-
-    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-    .toolbar h2 { margin: 0; }
-    .select { min-width: 170px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--text); padding: 9px 12px; }
-
-    .list { display: grid; gap: 12px; }
-    .item { padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
-    .item-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-    .item h3 { margin: 0; font-size: 1rem; }
-    .item p { margin: 8px 0 0; color: var(--muted); }
-
-    .badge { display: inline-flex; align-items: center; min-width: max-content; border-radius: 999px; padding: 4px 9px; background: var(--surface-soft); color: var(--accent-strong); font-size: 0.76rem; font-weight: 800; text-transform: capitalize; }
-    .badge.independent, .badge.complete { color: var(--success); }
-    .badge.revisit, .badge.paused { color: var(--danger); }
-    .badge.practised, .badge.current, .badge.active { color: var(--warning); }
-
-    details.phase { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
-    details.phase + details.phase { margin-top: 10px; }
-    details.phase summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px; cursor: pointer; font-weight: 750; }
-    details.phase summary::marker { color: var(--accent); }
-    .phase-body { padding: 0 16px 16px; color: var(--muted); }
-    .topic-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-    .topic-list li { border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; background: var(--surface-soft); }
-
-    .empty { padding: 28px; border: 1px dashed var(--line); border-radius: 14px; color: var(--muted); text-align: center; }
-    footer { padding: 8px 0 32px; color: var(--muted); font-size: 0.84rem; text-align: center; }
-
-    @media (max-width: 820px) {
-      .hero { grid-template-columns: 1fr; padding: 24px; }
-      .card, .card.wide { grid-column: 1 / -1; }
-    }
-
-    @media (max-width: 560px) {
-      .shell { width: min(100% - 20px, 1120px); }
-      .topbar { align-items: flex-start; }
-      .brand span { display: none; }
-      .hero { padding: 20px; border-radius: 20px; }
-      .meta-row { grid-template-columns: 1fr; gap: 2px; }
-      .toolbar { align-items: stretch; flex-direction: column; }
-      .select { width: 100%; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
-    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:radial-gradient(circle at 15% 0%,rgba(89,121,240,.16),transparent 34rem),var(--page);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+    button,input,select,textarea{font:inherit}
+    button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+    .shell{width:min(1120px,calc(100% - 32px));margin:0 auto}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 0 16px;color:var(--topbar-text)}
+    .brand,.actions,.item-head{display:flex;align-items:center;gap:12px}.brand strong{display:block}.brand span{color:var(--muted);font-size:.84rem}
+    .logo{display:grid;width:44px;height:44px;place-items:center;border-radius:14px;background:var(--accent);color:var(--page);font-family:system-ui,sans-serif;font-weight:900;box-shadow:var(--shadow)}
+    .actions{flex-wrap:wrap;gap:8px}.button{border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);cursor:pointer;padding:10px 14px;transition:transform 150ms ease,border-color 150ms ease}.button:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .button.primary{border-color:var(--accent);background:var(--accent);color:var(--page);font-weight:750}.button.small{padding:7px 11px;font-size:.86rem}.button.danger{color:var(--danger)}.button:disabled{cursor:not-allowed;opacity:.55;transform:none}
+    .hero{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,.85fr);gap:20px;padding:34px;border:1px solid var(--line);border-radius:26px;background:var(--surface);box-shadow:var(--shadow)}
+    .eyebrow{margin:0 0 8px;color:var(--accent);font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+    h1{margin:0;max-width:760px;font-size:clamp(2rem,5vw,3.6rem);line-height:1.04;letter-spacing:-.045em}.lede{max-width:680px;margin:16px 0 0;color:var(--muted);font-size:1.02rem}
+    .next-card{padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--soft)}.next-card h2{margin:0 0 8px;font-size:1rem}.next-card p{margin:0 0 16px}
+    .status{min-height:1.4em;margin-top:8px;color:var(--muted);font-size:.82rem}.progress-wrap{margin-top:26px}.progress-label{display:flex;justify-content:space-between;margin-bottom:8px;color:var(--muted);font-size:.9rem}.progress-track{height:12px;overflow:hidden;border-radius:999px;background:var(--line)}.progress-bar{width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--success));transition:width 350ms ease}
+    .tabs{display:flex;gap:8px;margin:24px 0 18px;padding:6px;overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}.tab{min-width:max-content;border:0;border-radius:11px;background:transparent;color:var(--muted);cursor:pointer;padding:10px 16px;font-weight:700}.tab[aria-selected="true"]{background:var(--soft);color:var(--accent-strong)}[role="tabpanel"][hidden]{display:none}
+    .panel{padding-bottom:34px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{grid-column:span 4;padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:0 8px 30px rgba(35,55,90,.05)}.card.wide{grid-column:span 8}.card.full{grid-column:1/-1}.card h2,.card h3{margin-top:0}.stat{margin:4px 0 0;font-size:2rem;font-weight:850;letter-spacing:-.04em}.muted{color:var(--muted)}
+    .toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.toolbar h2{margin:0}.meta-list{display:grid;gap:10px;margin:0}.meta-row{display:grid;grid-template-columns:130px 1fr;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}.meta-row:last-child{padding:0;border:0}.meta-row dt{color:var(--muted)}.meta-row dd{margin:0;font-weight:650;overflow-wrap:anywhere}
+    .list{display:grid;gap:12px}.item{padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}.item-head{align-items:flex-start;justify-content:space-between}.item h3{margin:0;font-size:1rem}.item p{margin:8px 0 0;color:var(--muted)}
+    .badge{display:inline-flex;min-width:max-content;border-radius:999px;padding:4px 9px;background:var(--soft);color:var(--accent-strong);font-size:.76rem;font-weight:800;text-transform:capitalize}.badge.complete,.badge.independent{color:var(--success)}.badge.revisit,.badge.paused{color:var(--danger)}.badge.current,.badge.active,.badge.ready,.badge.practised{color:var(--warning)}
+    details.phase{border:1px solid var(--line);border-radius:14px;background:var(--surface)}details.phase+details.phase{margin-top:10px}details.phase summary{display:flex;justify-content:space-between;gap:16px;padding:16px;cursor:pointer;font-weight:750}.phase-body{padding:0 16px 16px;color:var(--muted)}.topic-list{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;padding:0;list-style:none}.topic-list li{border:1px solid var(--line);border-radius:999px;padding:5px 10px;background:var(--soft)}
+    .field{display:grid;gap:6px}.field>span{color:var(--muted);font-size:.88rem;font-weight:650}.input,.select,.textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);padding:10px 12px}.select{min-width:170px}.textarea{min-height:110px;resize:vertical}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.form-grid .full{grid-column:1/-1}
+    .checklist{display:grid;gap:10px;margin:16px 0;padding:0;list-style:none}.checklist label{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:var(--soft);cursor:pointer}.checklist input{width:18px;height:18px;margin-top:3px;accent-color:var(--accent)}.checklist input:checked+span{color:var(--muted);text-decoration:line-through}
+    .notice{padding:12px 14px;border-left:4px solid var(--accent);border-radius:8px;background:var(--soft);color:var(--muted)}.empty{padding:28px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);text-align:center}.hidden-input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+    dialog{width:min(620px,calc(100% - 24px));max-height:calc(100vh - 40px);overflow:auto;border:1px solid var(--line);border-radius:20px;background:var(--surface);color:var(--text);padding:0;box-shadow:var(--shadow)}dialog::backdrop{background:rgba(15,23,42,.68)}.dialog-body{padding:24px}.dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}.dialog-head h2{margin:0}.dialog-head p{margin:4px 0 0;color:var(--muted)}
+    .toast{position:fixed;right:20px;bottom:20px;z-index:20;max-width:min(360px,calc(100% - 40px));padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);box-shadow:var(--shadow)}.toast[hidden]{display:none}footer{padding:8px 0 32px;color:var(--muted);font-size:.84rem;text-align:center}
+    @media(max-width:820px){.hero{grid-template-columns:1fr;padding:24px}.card,.card.wide{grid-column:1/-1}}
+    @media(max-width:560px){.shell{width:min(100% - 20px,1120px)}.topbar{align-items:flex-start}.brand span{display:none}.hero{padding:20px;border-radius:20px}.meta-row{grid-template-columns:1fr;gap:2px}.toolbar{align-items:stretch;flex-direction:column}.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
   <header class="shell topbar">
-    <div class="brand">
-      <div class="logo" aria-hidden="true">Py</div>
-      <div>
-        <strong>Learn Python with Projects</strong>
-        <span>Interactive learning dashboard</span>
-      </div>
-    </div>
-    <button class="button" id="theme-toggle" type="button" aria-label="Switch color theme">Dark theme</button>
+    <div class="brand"><div class="logo" aria-hidden="true">Py</div><div><strong>Learn Python with Projects</strong><span>Interactive learning dashboard</span></div></div>
+    <div class="actions"><button class="button small" id="export-data" type="button">Export</button><label class="button small" for="import-data">Import</label><input class="hidden-input" id="import-data" type="file" accept="application/json,.json"><button class="button" id="theme-toggle" type="button" aria-label="Switch color theme">Dark theme</button></div>
   </header>
 
   <main class="shell">
     <section class="hero" aria-labelledby="page-title">
-      <div>
-        <p class="eyebrow" id="phase-label">Adaptive Python path</p>
-        <h1 id="page-title">Build, test, understand.</h1>
-        <p class="lede" id="project-purpose">Your current project and verified progress will appear here.</p>
-        <div class="progress-wrap">
-          <div class="progress-label"><span>Curriculum progress</span><strong id="progress-text">0%</strong></div>
-          <div class="progress-track" role="progressbar" aria-label="Curriculum progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="progress-bar" id="progress-bar"></div>
-          </div>
-        </div>
+      <div><p class="eyebrow" id="phase-label">Adaptive Python path</p><h1 id="page-title">Build, test, understand.</h1><p class="lede" id="project-purpose">Set up your path, then work through one meaningful project step at a time.</p>
+        <div class="progress-wrap"><div class="progress-label"><span>Project task progress</span><strong id="progress-text">0%</strong></div><div class="progress-track" role="progressbar" aria-label="Project task progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar" id="progress-bar"></div></div></div>
       </div>
-      <aside class="next-card" aria-labelledby="next-title">
-        <h2 id="next-title">Your next step</h2>
-        <p id="next-step">Start a placement conversation.</p>
-        <button class="button primary" id="copy-next" type="button">Copy next step</button>
-        <div class="copy-status" id="copy-status" role="status" aria-live="polite"></div>
-      </aside>
+      <aside class="next-card" aria-labelledby="next-title"><h2 id="next-title">Your next step</h2><p id="next-step">Complete the quick placement setup.</p><div class="actions"><button class="button primary" id="primary-action" type="button">Set up my path</button><button class="button" id="copy-next" type="button">Copy step</button></div><div class="status" id="copy-status" role="status" aria-live="polite"></div></aside>
     </section>
 
     <nav class="tabs" role="tablist" aria-label="Learning dashboard sections">
       <button class="tab" id="tab-overview" role="tab" aria-selected="true" aria-controls="panel-overview" tabindex="0">Overview</button>
+      <button class="tab" id="tab-practice" role="tab" aria-selected="false" aria-controls="panel-practice" tabindex="-1">Practice</button>
       <button class="tab" id="tab-curriculum" role="tab" aria-selected="false" aria-controls="panel-curriculum" tabindex="-1">Curriculum</button>
       <button class="tab" id="tab-projects" role="tab" aria-selected="false" aria-controls="panel-projects" tabindex="-1">Projects</button>
       <button class="tab" id="tab-sessions" role="tab" aria-selected="false" aria-controls="panel-sessions" tabindex="-1">Sessions</button>
     </nav>
 
-    <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
-      <div class="grid">
-        <article class="card"><span class="muted">Concepts tracked</span><p class="stat" id="stat-concepts">0</p></article>
-        <article class="card"><span class="muted">Independent</span><p class="stat" id="stat-independent">0</p></article>
-        <article class="card"><span class="muted">Projects complete</span><p class="stat" id="stat-projects">0</p></article>
-        <article class="card wide">
-          <h2>Current project</h2>
-          <dl class="meta-list" id="current-project"></dl>
-        </article>
-        <article class="card">
-          <h2>Learner setup</h2>
-          <dl class="meta-list" id="learner-setup"></dl>
-        </article>
-        <article class="card full">
-          <div class="toolbar">
-            <h2>Mastery</h2>
-            <label><span class="muted">Filter </span>
-              <select class="select" id="mastery-filter">
-                <option value="all">All states</option>
-                <option value="introduced">Introduced</option>
-                <option value="practised">Practised</option>
-                <option value="independent">Independent</option>
-                <option value="revisit">Revisit</option>
-              </select>
-            </label>
-          </div>
-          <div class="list" id="mastery-list"></div>
-        </article>
-      </div>
-    </section>
+    <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview"><div class="grid">
+      <article class="card"><span class="muted">Tasks complete</span><p class="stat" id="stat-tasks">0</p></article><article class="card"><span class="muted">Concepts tracked</span><p class="stat" id="stat-concepts">0</p></article><article class="card"><span class="muted">Projects complete</span><p class="stat" id="stat-projects">0</p></article>
+      <article class="card wide"><div class="toolbar"><h2>Current project</h2><button class="button small" id="edit-setup" type="button">Edit setup</button></div><dl class="meta-list" id="current-project"></dl></article><article class="card"><h2>Learner setup</h2><dl class="meta-list" id="learner-setup"></dl></article>
+      <article class="card full"><div class="toolbar"><h2>Mastery evidence</h2><label><span class="muted">Filter </span><select class="select" id="mastery-filter"><option value="all">All states</option><option value="introduced">Introduced</option><option value="practised">Practised</option><option value="independent">Independent</option><option value="revisit">Revisit</option></select></label></div><div class="list" id="mastery-list"></div></article>
+      <article class="card full"><h2>Local data</h2><p class="notice">This page autosaves a private working copy in this browser. Export it before clearing browser data. Your coach should review real code and tests before copying evidence into <code>progress.md</code>.</p><div class="actions"><button class="button" id="export-data-secondary" type="button">Export JSON backup</button><button class="button danger" id="reset-data" type="button">Reset local progress</button></div></article>
+    </div></section>
 
-    <section class="panel" id="panel-curriculum" role="tabpanel" aria-labelledby="tab-curriculum" hidden>
-      <div id="phase-list"></div>
-    </section>
+    <section class="panel" id="panel-practice" role="tabpanel" aria-labelledby="tab-practice" hidden><div class="grid">
+      <article class="card wide"><p class="eyebrow">Active build</p><h2 id="practice-title">Complete placement to begin</h2><p class="muted" id="practice-purpose">Your recommended project and checklist will appear here.</p><ul class="checklist" id="practice-tasks"></ul><div class="actions"><button class="button primary" id="finish-project" type="button" disabled>Mark ready for review</button><button class="button" id="copy-brief" type="button" disabled>Copy project brief</button></div><div class="status" id="practice-status" role="status" aria-live="polite"></div></article>
+      <article class="card"><h2>Code scratchpad</h2><label class="field" for="scratchpad"><span>Draft ideas or Python code</span><textarea class="textarea" id="scratchpad" spellcheck="false" placeholder="# Your notes stay in this browser"></textarea></label><p class="muted">Saved locally. This static page does not execute Python; run code in your terminal and record the result below.</p></article>
+      <article class="card full"><h2>Close this learning session</h2><form id="session-form" class="form-grid"><label class="field"><span>What did you build or change?</span><textarea class="textarea" id="session-outcome" required></textarea></label><label class="field"><span>What command/result did you verify?</span><textarea class="textarea" id="session-verification" placeholder="Example: py -m unittest — 6 tests passed"></textarea></label><label class="field full"><span>What is the next small step?</span><input class="input" id="session-next" required></label><div class="actions full"><button class="button primary" type="submit">Save session locally</button></div></form></article>
+    </div></section>
 
-    <section class="panel" id="panel-projects" role="tabpanel" aria-labelledby="tab-projects" hidden>
-      <div class="list" id="project-list"></div>
-    </section>
-
-    <section class="panel" id="panel-sessions" role="tabpanel" aria-labelledby="tab-sessions" hidden>
-      <div class="list" id="session-list"></div>
-    </section>
+    <section class="panel" id="panel-curriculum" role="tabpanel" aria-labelledby="tab-curriculum" hidden><div id="phase-list"></div></section>
+    <section class="panel" id="panel-projects" role="tabpanel" aria-labelledby="tab-projects" hidden><div class="list" id="project-list"></div></section>
+    <section class="panel" id="panel-sessions" role="tabpanel" aria-labelledby="tab-sessions" hidden><div class="list" id="session-list"></div></section>
   </main>
 
-  <footer class="shell">Dashboard generated <time id="generated-at">not yet</time>. Progress is updated by your learning coach, not by this page.</footer>
+  <footer class="shell">Offline learning workspace · Local copy last saved <time id="saved-at">not yet</time> · No analytics or network requests</footer>
+
+  <dialog id="setup-dialog" aria-labelledby="setup-title"><form class="dialog-body" id="setup-form" method="dialog"><div class="dialog-head"><div><h2 id="setup-title">Set up your learning path</h2><p>A short self-placement chooses a practical starting project. You can change it later.</p></div><button class="button small" id="close-setup" type="button">Close</button></div><div class="form-grid">
+    <label class="field full"><span>Your Python goal</span><input class="input" id="setup-goal" value="Build a broad Python foundation" required></label>
+    <label class="field"><span>Current experience</span><select class="select" id="setup-experience"><option value="new">I have never programmed</option><option value="beginner">I know variables and loops</option><option value="developing">I can write small Python scripts</option></select></label>
+    <label class="field"><span>Typical session</span><select class="select" id="setup-duration"><option>30–45 minutes</option><option selected>60–90 minutes</option><option>2 hours</option></select></label>
+    <label class="field full"><span>Interpreter status</span><select class="select" id="setup-interpreter"><option>Not checked</option><option>Not installed</option><option>Installed — verification pending</option><option>Verified in learner terminal</option></select></label>
+    <div class="actions full"><button class="button primary" type="submit">Create my learning path</button></div>
+  </div></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
   <script id="learning-data" type="application/json">
   {
-    "generatedAt": "",
-    "learner": { "goal": "Broad Python foundation", "phase": "Placement", "interpreter": "Not checked" },
-    "current": { "project": "Placement", "purpose": "Discover the right starting point.", "status": "planned", "nextStep": "Start a placement conversation.", "lastCommand": "", "lastResult": "" },
-    "mastery": [],
-    "phases": [],
-    "projects": [],
-    "sessions": []
+    "version":1,"generatedAt":"","savedAt":"",
+    "learner":{"goal":"Build a broad Python foundation","phase":"Placement","interpreter":"Not checked","experience":"new","sessionLength":"60–90 minutes","onboardingComplete":false},
+    "current":{"projectId":"","project":"Placement","purpose":"Discover the right starting point.","status":"planned","nextStep":"Complete the quick placement setup.","lastCommand":"","lastResult":""},
+    "mastery":[],
+    "phases":[
+      {"number":1,"title":"Python foundations","status":"available","topics":["environment","expressions","variables","types","input/output","control flow"]},
+      {"number":2,"title":"Functions and decomposition","status":"locked","topics":["parameters","return values","scope","recursion fundamentals","built-ins"]},
+      {"number":3,"title":"Collections and data modelling","status":"locked","topics":["strings","lists","tuples","dictionaries","sets","comprehensions","sorting"]},
+      {"number":4,"title":"Files, errors, and modules","status":"locked","topics":["pathlib","CSV","JSON","exceptions","imports","packages","CLI"]},
+      {"number":5,"title":"Object-oriented Python","status":"locked","topics":["classes","dataclasses","composition","inheritance","properties","protocols"]},
+      {"number":6,"title":"Quality and testing","status":"locked","topics":["debugging","assertions","type hints","logging","unit tests","refactoring"]},
+      {"number":7,"title":"Advanced language tools","status":"locked","topics":["iterators","generators","decorators","context managers","regular expressions","dates"]},
+      {"number":8,"title":"Data, APIs, and concurrency","status":"locked","topics":["SQLite","HTTP APIs","automation","threading","multiprocessing","async"]},
+      {"number":9,"title":"Portfolio capstone","status":"locked","topics":["persistence","testing","error handling","modular design","documentation"]}
+    ],
+    "projects":[
+      {"id":"quiz","phase":1,"name":"01 · Interactive quiz","purpose":"Build a terminal quiz that validates answers and tracks a score.","status":"planned","concepts":["variables","input/output","conditionals","loops"],"verification":"Not verified","path":"projects/01-interactive-quiz/","tasks":["Create five question-and-answer pairs","Ask each question and normalize the response","Update and display the score","Handle an empty answer without crashing"],"completedTasks":[]},
+      {"id":"expense","phase":3,"name":"02 · Expense tracker","purpose":"Model expenses, summarize categories, and save useful data.","status":"planned","concepts":["functions","lists","dictionaries","sorting"],"verification":"Not verified","path":"projects/02-expense-tracker/","tasks":["Represent one expense with clear fields","Add expenses through a focused function","Calculate totals by category","Display a sorted summary"],"completedTasks":[]},
+      {"id":"organiser","phase":4,"name":"03 · File organiser","purpose":"Safely plan and organize files by type using pathlib.","status":"planned","concepts":["pathlib","files","exceptions","functions"],"verification":"Not verified","path":"projects/03-file-organiser/","tasks":["List files without modifying them","Map extensions to destination folders","Add a dry-run preview","Handle name collisions and errors"],"completedTasks":[]},
+      {"id":"contacts","phase":5,"name":"04 · Contact manager","purpose":"Design an object-oriented contact book with JSON persistence.","status":"planned","concepts":["classes","dataclasses","JSON","composition"],"verification":"Not verified","path":"projects/04-contact-manager/","tasks":["Model a contact with a dataclass","Add search and update operations","Save and load JSON data","Test invalid input"],"completedTasks":[]},
+      {"id":"logs","phase":6,"name":"05 · Log analyser","purpose":"Parse logs, report patterns, and support the behavior with tests.","status":"planned","concepts":["regular expressions","collections","logging","unit tests"],"verification":"Not verified","path":"projects/05-log-analyser/","tasks":["Parse one log-line format","Count events and error levels","Report common patterns","Add fixture-based unit tests"],"completedTasks":[]},
+      {"id":"api","phase":7,"name":"06 · API client with fixtures","purpose":"Build a resilient client without depending on live services.","status":"planned","concepts":["HTTP","JSON","exceptions","fixtures"],"verification":"Not verified","path":"projects/06-api-client/","tasks":["Load an offline response fixture","Validate the response shape","Transform data into a useful report","Handle malformed fields"],"completedTasks":[]},
+      {"id":"tasks","phase":8,"name":"07 · SQLite task manager","purpose":"Create a persistent command-line task manager with reliable tests.","status":"planned","concepts":["SQLite","context managers","CLI","testing"],"verification":"Not verified","path":"projects/07-sqlite-task-manager/","tasks":["Create the database schema","Add and list tasks","Update task status","Test persistence in a temporary database"],"completedTasks":[]},
+      {"id":"capstone","phase":9,"name":"08 · Portfolio capstone","purpose":"Combine persistence, testing, error handling, modular design, and documentation.","status":"planned","concepts":["architecture","persistence","testing","documentation"],"verification":"Not verified","path":"projects/08-capstone/","tasks":["Write a one-page project brief","Build the smallest end-to-end feature","Add automated verification","Document setup and decisions"],"completedTasks":[]}
+    ],
+    "sessions":[],"scratchpad":""
   }
   </script>
 
   <script>
     "use strict";
+    const STORE="learn-python-projects:dashboard:v1",THEME="python-dashboard-theme",TAB="python-dashboard-tab";
+    const byId=id=>document.getElementById(id),arr=value=>Array.isArray(value)?value:[],text=(value,fallback="Not recorded")=>value===null||value===undefined||String(value).trim()===""?fallback:String(value);
+    const storage={get:key=>{try{return localStorage.getItem(key)}catch{return null}},set:(key,value)=>{try{localStorage.setItem(key,value);return true}catch{return false}},remove:key=>{try{localStorage.removeItem(key)}catch{}}};
+    const states=new Set(["introduced","practised","independent","revisit","locked","available","current","complete","planned","active","paused","ready"]),stateClass=value=>states.has(String(value))?String(value):"";
+    let defaults;try{defaults=JSON.parse(byId("learning-data").textContent)}catch(error){defaults={version:1,learner:{},current:{},mastery:[],phases:[],projects:[],sessions:[],scratchpad:""};console.error("Dashboard data could not be parsed.",error)}
+    const clone=value=>JSON.parse(JSON.stringify(value));
+    function normalize(candidate){const value=candidate&&typeof candidate==="object"?clone(candidate):clone(defaults);value.version=1;value.learner={...clone(defaults.learner||{}),...(value.learner||{})};value.current={...clone(defaults.current||{}),...(value.current||{})};value.mastery=arr(value.mastery);value.phases=arr(value.phases).length?value.phases:clone(defaults.phases||[]);value.projects=(arr(value.projects).length?value.projects:clone(defaults.projects||[])).map(project=>({...project,tasks:arr(project.tasks),completedTasks:arr(project.completedTasks)}));value.sessions=arr(value.sessions);value.scratchpad=text(value.scratchpad,"");return value}
+    let data=normalize(defaults);const saved=storage.get(STORE);if(saved){try{const parsed=JSON.parse(saved);if(parsed?.version===1)data=normalize(parsed)}catch{console.warn("Saved dashboard data was invalid and was ignored.")}}
 
-    const byId = (id) => document.getElementById(id);
-    const safeArray = (value) => Array.isArray(value) ? value : [];
-    const safeText = (value, fallback = "Not recorded") => {
-      if (value === null || value === undefined || String(value).trim() === "") return fallback;
-      return String(value);
-    };
-    const storage = {
-      get(key) {
-        try { return window.localStorage.getItem(key); } catch (error) { return null; }
-      },
-      set(key, value) {
-        try { window.localStorage.setItem(key, value); } catch (error) { /* Preferences remain session-only. */ }
-      }
-    };
-    const stateClasses = new Set(["introduced", "practised", "independent", "revisit", "locked", "available", "current", "complete", "planned", "active", "paused"]);
-    const stateClass = (value) => stateClasses.has(String(value)) ? String(value) : "";
+    let toastTimer;function toast(message){const node=byId("toast");node.textContent=message;node.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>node.hidden=true,2800)}
+    function persist(message){data.savedAt=new Date().toISOString();const ok=storage.set(STORE,JSON.stringify(data));renderAll();if(message)toast(ok?message:`${message} Browser storage was unavailable; export a backup.`)}
+    function el(tag,className="",value){const node=document.createElement(tag);if(className)node.className=className;if(value!==undefined)node.textContent=text(value,"");return node}
+    function button(label,handler){const node=el("button","button small",label);node.type="button";node.addEventListener("click",handler);return node}
+    function meta(list,label,value){const row=el("div","meta-row");row.append(el("dt","",label),el("dd","",text(value)));list.append(row)}
+    const empty=message=>el("div","empty",message),projectById=(id=data.current.projectId)=>data.projects.find(project=>project.id===id);
+    function totals(){return data.projects.filter(project=>project.status!=="planned"||project.id===data.current.projectId).reduce((sum,project)=>{sum.all+=project.tasks.length;sum.done+=project.completedTasks.filter(task=>project.tasks.includes(task)).length;return sum},{all:0,done:0})}
 
-    let data;
-    try {
-      data = JSON.parse(byId("learning-data").textContent);
-    } catch (error) {
-      data = { learner: {}, current: {}, mastery: [], phases: [], projects: [], sessions: [] };
-      console.error("Dashboard data could not be parsed.", error);
-    }
+    function renderHeader(){byId("phase-label").textContent=text(data.learner.phase,"Adaptive Python path");byId("page-title").textContent=text(data.current.project,"Build, test, understand.");byId("project-purpose").textContent=text(data.current.purpose,"Set up your path, then work through one project step at a time.");byId("next-step").textContent=text(data.current.nextStep,"Complete placement.");byId("primary-action").textContent=data.learner.onboardingComplete?"Continue project":"Set up my path";const count=totals(),progress=count.all?Math.round(count.done/count.all*100):0;byId("progress-text").textContent=`${progress}%`;byId("progress-bar").style.width=`${progress}%`;byId("progress-bar").parentElement.setAttribute("aria-valuenow",String(progress))}
+    function renderOverview(){const count=totals();byId("stat-tasks").textContent=count.done;byId("stat-concepts").textContent=data.mastery.length;byId("stat-projects").textContent=data.projects.filter(item=>item.status==="complete").length;const current=byId("current-project");current.replaceChildren();meta(current,"Status",data.current.status);meta(current,"Last command",data.current.lastCommand);meta(current,"Last result",data.current.lastResult);const learner=byId("learner-setup");learner.replaceChildren();meta(learner,"Goal",data.learner.goal);meta(learner,"Phase",data.learner.phase);meta(learner,"Session",data.learner.sessionLength);meta(learner,"Interpreter",data.learner.interpreter);renderMastery()}
+    function renderMastery(){const node=byId("mastery-list"),filter=byId("mastery-filter").value,items=filter==="all"?data.mastery:data.mastery.filter(item=>item.state===filter);node.replaceChildren();if(!items.length){node.append(empty(filter==="all"?"No reviewed mastery evidence yet. Complete work, run it, and ask your coach for a code review.":`No concepts marked ${filter}.`));return}items.forEach(item=>{const card=el("article","item"),head=el("div","item-head");head.append(el("h3","",item.concept),el("span",`badge ${stateClass(item.state)}`,item.state));card.append(head,el("p","",item.evidence),el("p","muted",`Last practised: ${text(item.lastPractised)}`));node.append(card)})}
+    function renderPractice(){const project=projectById(),list=byId("practice-tasks");list.replaceChildren();if(document.activeElement!==byId("scratchpad"))byId("scratchpad").value=data.scratchpad;if(!project){byId("practice-title").textContent="Complete placement to begin";byId("practice-purpose").textContent="Your recommended project and checklist will appear here.";list.append(empty("Use “Set up my path” above to choose a starting project."));byId("finish-project").disabled=true;byId("copy-brief").disabled=true;return}byId("practice-title").textContent=project.name;byId("practice-purpose").textContent=project.purpose;project.tasks.forEach((task,index)=>{const item=el("li"),label=el("label"),input=document.createElement("input");input.type="checkbox";input.checked=project.completedTasks.includes(task);input.setAttribute("aria-label",`Task ${index+1}: ${task}`);input.addEventListener("change",()=>{if(input.checked&&!project.completedTasks.includes(task))project.completedTasks.push(task);if(!input.checked)project.completedTasks=project.completedTasks.filter(value=>value!==task);data.current.nextStep=project.tasks.find(value=>!project.completedTasks.includes(value))||"Review your work, run the agreed checks, and record the result.";persist("Task progress saved locally.")});label.append(input,el("span","",task));item.append(label);list.append(item)});const allDone=project.tasks.length&&project.tasks.every(task=>project.completedTasks.includes(task)),reviewed=["ready","complete"].includes(project.status);byId("finish-project").disabled=!allDone||reviewed;byId("finish-project").textContent=project.status==="complete"?"Project marked complete":project.status==="ready"?"Ready for review":"Mark ready for review";byId("copy-brief").disabled=false}
+    function renderPhases(){const node=byId("phase-list");node.replaceChildren();data.phases.forEach(phase=>{const details=el("details","phase");if(phase.status==="current")details.open=true;const summary=el("summary");summary.append(el("span","",`Phase ${phase.number} · ${phase.title}`),el("span",`badge ${stateClass(phase.status)}`,phase.status));const body=el("div","phase-body"),topics=el("ul","topic-list");arr(phase.topics).forEach(topic=>topics.append(el("li","",topic)));body.append(topics);const project=data.projects.find(item=>item.phase===phase.number);if(project)body.append(el("p","",`Project: ${project.name} — ${project.purpose}`));details.append(summary,body);node.append(details)})}
+    function activateProject(id){const project=projectById(id);if(!project)return;data.projects.forEach(item=>{if(item.status==="active"&&item.id!==id)item.status="paused"});if(["planned","paused"].includes(project.status))project.status="active";data.phases.forEach(phase=>{if(phase.number===project.phase)phase.status="current";else if(phase.status==="current")phase.status="available"});const phase=data.phases.find(item=>item.number===project.phase);data.learner.phase=phase?`Phase ${phase.number} · ${phase.title}`:data.learner.phase;data.current={projectId:project.id,project:project.name,purpose:project.purpose,status:project.status,nextStep:project.tasks.find(task=>!project.completedTasks.includes(task))||"Review and verify the project.",lastCommand:data.current.lastCommand||"",lastResult:data.current.lastResult||""};persist(`${project.name} is now active.`);activateTab(byId("tab-practice"));byId("panel-practice").scrollIntoView({behavior:"smooth",block:"start"})}
+    function renderProjects(){const node=byId("project-list");node.replaceChildren();data.projects.forEach(project=>{const card=el("article","item"),head=el("div","item-head");head.append(el("h3","",project.name),el("span",`badge ${stateClass(project.status)}`,project.status));card.append(head,el("p","",project.purpose),el("p","",`Concepts: ${project.concepts.join(", ")}`),el("p","",`Tasks: ${project.completedTasks.length}/${project.tasks.length} · Verification: ${text(project.verification)}`));card.append(button(project.id===data.current.projectId?"Continue":project.status==="planned"?"Start project":"Open project",()=>activateProject(project.id)));node.append(card)})}
+    function renderSessions(){const node=byId("session-list");node.replaceChildren();if(!data.sessions.length){node.append(empty("No session notes yet. Save one from Practice after you work on code."));return}[...data.sessions].reverse().forEach(session=>{const card=el("article","item"),head=el("div","item-head");head.append(el("h3","",session.outcome),el("span","badge",session.date));card.append(head,el("p","",`Verification: ${text(session.verification)}`),el("p","",`Next: ${text(session.next)}`));node.append(card)})}
+    function renderAll(){renderHeader();renderOverview();renderPractice();renderPhases();renderProjects();renderSessions();byId("saved-at").textContent=data.savedAt?new Date(data.savedAt).toLocaleString():"not yet"}
 
-    data.learner = data.learner || {};
-    data.current = data.current || {};
-    data.mastery = safeArray(data.mastery);
-    data.phases = safeArray(data.phases);
-    data.projects = safeArray(data.projects);
-    data.sessions = safeArray(data.sessions);
+    function activateTab(tab){if(!tab)return;document.querySelectorAll('[role="tab"]').forEach(candidate=>{const selected=candidate===tab;candidate.setAttribute("aria-selected",selected);candidate.tabIndex=selected?0:-1;byId(candidate.getAttribute("aria-controls")).hidden=!selected});storage.set(TAB,tab.id)}
+    const tabs=[...document.querySelectorAll('[role="tab"]')];tabs.forEach((tab,index)=>{tab.addEventListener("click",()=>activateTab(tab));tab.addEventListener("keydown",event=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;event.preventDefault();let target=index;if(event.key==="ArrowLeft")target=(index-1+tabs.length)%tabs.length;if(event.key==="ArrowRight")target=(index+1)%tabs.length;if(event.key==="Home")target=0;if(event.key==="End")target=tabs.length-1;activateTab(tabs[target]);tabs[target].focus()})});
+    async function copy(value,message,status){try{if(navigator.clipboard&&isSecureContext)await navigator.clipboard.writeText(value);else{const helper=el("textarea");helper.value=value;helper.readOnly=true;helper.style.cssText="position:fixed;opacity:0";document.body.append(helper);helper.select();if(!document.execCommand("copy"))throw new Error();helper.remove()}if(status)status.textContent=message;toast(message)}catch{if(status)status.textContent="Copy was unavailable. Select the text manually."}}
+    function openSetup(){byId("setup-goal").value=text(data.learner.goal,"Build a broad Python foundation");byId("setup-experience").value=data.learner.experience||"new";byId("setup-duration").value=data.learner.sessionLength||"60–90 minutes";byId("setup-interpreter").value=data.learner.interpreter||"Not checked";byId("setup-dialog").showModal()}
+    function place(experience){const id={new:"quiz",beginner:"expense",developing:"organiser"}[experience]||"quiz",project=projectById(id);data.projects.forEach(item=>{if(item.status==="active")item.status="planned"});project.status="active";data.phases.forEach(phase=>phase.status=phase.number===project.phase?"current":phase.number<project.phase?"available":"locked");const phase=data.phases.find(item=>item.number===project.phase);data.learner.phase=`Phase ${phase.number} · ${phase.title}`;data.current={projectId:project.id,project:project.name,purpose:project.purpose,status:"active",nextStep:project.tasks[0],lastCommand:"",lastResult:""}}
+    function finishProject(){const project=projectById();if(!project||!project.tasks.every(task=>project.completedTasks.includes(task)))return;project.status="ready";project.verification="Ready for coach review — not yet verified";data.current.status="ready";data.current.nextStep="Run the project and tests, then ask your coach to review the result.";persist("Project marked ready for review. Verification is still required.")}
+    function saveSession(event){event.preventDefault();const outcome=byId("session-outcome").value.trim(),next=byId("session-next").value.trim(),verification=byId("session-verification").value.trim()||"Not run — dashboard cannot execute Python";if(!outcome||!next)return;data.sessions.push({date:new Date().toISOString().slice(0,10),outcome,verification,next});data.current.nextStep=next;data.current.lastResult=verification;const match=verification.match(/^(.+?)\s+[—-]\s+/);if(match)data.current.lastCommand=match[1].trim();event.currentTarget.reset();persist("Session note saved locally.");activateTab(byId("tab-sessions"))}
+    function exportData(){const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),link=el("a");link.href=url;link.download="python-learning-dashboard-progress.json";document.body.append(link);link.click();link.remove();URL.revokeObjectURL(url);toast("JSON backup exported.")}
+    async function importData(event){const file=event.target.files?.[0];if(!file)return;try{const imported=JSON.parse(await file.text());if(imported?.version!==1||!Array.isArray(imported.projects)||!Array.isArray(imported.phases))throw new Error();data=normalize(imported);persist("Backup imported successfully.")}catch{toast("That file is not a valid dashboard backup.")}finally{event.target.value=""}}
+    function resetData(){if(!confirm("Reset all locally saved dashboard progress? Export first if you need a backup."))return;storage.remove(STORE);data=normalize(defaults);renderAll();toast("Local dashboard progress reset.")}
+    function setTheme(value){const theme=value==="dark"?"dark":"light";document.documentElement.dataset.theme=theme;byId("theme-toggle").textContent=theme==="dark"?"Light theme":"Dark theme";storage.set(THEME,theme)}
 
-    function makeElement(tag, className, text) {
-      const element = document.createElement(tag);
-      if (className) element.className = className;
-      if (text !== undefined) element.textContent = safeText(text, "");
-      return element;
-    }
-
-    function addMetaRow(list, label, value) {
-      const row = makeElement("div", "meta-row");
-      row.append(makeElement("dt", "", label), makeElement("dd", "", safeText(value)));
-      list.append(row);
-    }
-
-    function emptyState(message) {
-      return makeElement("div", "empty", message);
-    }
-
-    function renderHeader() {
-      byId("phase-label").textContent = safeText(data.learner.phase, "Adaptive Python path");
-      byId("page-title").textContent = safeText(data.current.project, "Build, test, understand.");
-      byId("project-purpose").textContent = safeText(data.current.purpose, "Your current project and verified progress will appear here.");
-      byId("next-step").textContent = safeText(data.current.nextStep, "Start a placement conversation.");
-
-      const completed = data.phases.filter((phase) => phase.status === "complete").length;
-      const progress = data.phases.length ? Math.round((completed / data.phases.length) * 100) : 0;
-      byId("progress-text").textContent = `${progress}%`;
-      byId("progress-bar").style.width = `${progress}%`;
-      byId("progress-bar").parentElement.setAttribute("aria-valuenow", String(progress));
-    }
-
-    function renderOverview() {
-      byId("stat-concepts").textContent = String(data.mastery.length);
-      byId("stat-independent").textContent = String(data.mastery.filter((item) => item.state === "independent").length);
-      byId("stat-projects").textContent = String(data.projects.filter((item) => item.status === "complete").length);
-
-      const project = byId("current-project");
-      project.replaceChildren();
-      addMetaRow(project, "Status", data.current.status);
-      addMetaRow(project, "Last command", data.current.lastCommand);
-      addMetaRow(project, "Last result", data.current.lastResult);
-
-      const setup = byId("learner-setup");
-      setup.replaceChildren();
-      addMetaRow(setup, "Goal", data.learner.goal);
-      addMetaRow(setup, "Phase", data.learner.phase);
-      addMetaRow(setup, "Interpreter", data.learner.interpreter);
-
-      renderMastery();
-    }
-
-    function renderMastery() {
-      const container = byId("mastery-list");
-      const filter = byId("mastery-filter").value;
-      const items = filter === "all" ? data.mastery : data.mastery.filter((item) => item.state === filter);
-      container.replaceChildren();
-      if (!items.length) {
-        container.append(emptyState(filter === "all" ? "No mastery evidence recorded yet." : `No concepts marked ${filter}.`));
-        return;
-      }
-      items.forEach((item) => {
-        const card = makeElement("article", "item");
-        const head = makeElement("div", "item-head");
-        head.append(makeElement("h3", "", item.concept), makeElement("span", `badge ${stateClass(item.state)}`, item.state));
-        card.append(head, makeElement("p", "", item.evidence));
-        const date = makeElement("p", "muted", `Last practised: ${safeText(item.lastPractised)}`);
-        card.append(date);
-        container.append(card);
-      });
-    }
-
-    function renderPhases() {
-      const container = byId("phase-list");
-      container.replaceChildren();
-      if (!data.phases.length) {
-        container.append(emptyState("Your curriculum path will appear after placement."));
-        return;
-      }
-      data.phases.forEach((phase) => {
-        const details = makeElement("details", "phase");
-        if (phase.status === "current") details.open = true;
-        const summary = document.createElement("summary");
-        summary.append(makeElement("span", "", `Phase ${safeText(phase.number, "–")} · ${safeText(phase.title)}`));
-        summary.append(makeElement("span", `badge ${stateClass(phase.status)}`, phase.status));
-        const body = makeElement("div", "phase-body");
-        const topics = makeElement("ul", "topic-list");
-        safeArray(phase.topics).forEach((topic) => topics.append(makeElement("li", "", topic)));
-        if (!topics.children.length) topics.append(makeElement("li", "", "Topics will be added when this phase is planned."));
-        body.append(topics);
-        details.append(summary, body);
-        container.append(details);
-      });
-    }
-
-    function renderProjects() {
-      const container = byId("project-list");
-      container.replaceChildren();
-      if (!data.projects.length) {
-        container.append(emptyState("No projects recorded yet. Your first project begins after placement."));
-        return;
-      }
-      data.projects.forEach((project) => {
-        const card = makeElement("article", "item");
-        const head = makeElement("div", "item-head");
-        head.append(makeElement("h3", "", project.name), makeElement("span", `badge ${stateClass(project.status)}`, project.status));
-        card.append(head);
-        card.append(makeElement("p", "", `Concepts: ${safeArray(project.concepts).join(", ") || "Not recorded"}`));
-        card.append(makeElement("p", "", `Verification: ${safeText(project.verification)}`));
-        card.append(makeElement("p", "", `Path: ${safeText(project.path)}`));
-        container.append(card);
-      });
-    }
-
-    function renderSessions() {
-      const container = byId("session-list");
-      container.replaceChildren();
-      if (!data.sessions.length) {
-        container.append(emptyState("Completed session summaries will appear here."));
-        return;
-      }
-      data.sessions.forEach((session) => {
-        const card = makeElement("article", "item");
-        const head = makeElement("div", "item-head");
-        head.append(makeElement("h3", "", session.outcome), makeElement("span", "badge", session.date));
-        card.append(head);
-        card.append(makeElement("p", "", `Verification: ${safeText(session.verification)}`));
-        card.append(makeElement("p", "", `Next: ${safeText(session.next)}`));
-        container.append(card);
-      });
-    }
-
-    function activateTab(tab) {
-      document.querySelectorAll('[role="tab"]').forEach((candidate) => {
-        const selected = candidate === tab;
-        candidate.setAttribute("aria-selected", String(selected));
-        candidate.tabIndex = selected ? 0 : -1;
-        byId(candidate.getAttribute("aria-controls")).hidden = !selected;
-      });
-      storage.set("python-dashboard-tab", tab.id);
-    }
-
-    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
-    tabs.forEach((tab, index) => {
-      tab.addEventListener("click", () => activateTab(tab));
-      tab.addEventListener("keydown", (event) => {
-        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
-        event.preventDefault();
-        let targetIndex = index;
-        if (event.key === "ArrowLeft") targetIndex = (index - 1 + tabs.length) % tabs.length;
-        if (event.key === "ArrowRight") targetIndex = (index + 1) % tabs.length;
-        if (event.key === "Home") targetIndex = 0;
-        if (event.key === "End") targetIndex = tabs.length - 1;
-        activateTab(tabs[targetIndex]);
-        tabs[targetIndex].focus();
-      });
-    });
-
-    async function copyNextStep() {
-      const text = safeText(data.current.nextStep, "Start a placement conversation.");
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-        } else {
-          const helper = document.createElement("textarea");
-          helper.value = text;
-          helper.setAttribute("readonly", "");
-          helper.style.position = "fixed";
-          helper.style.opacity = "0";
-          document.body.append(helper);
-          helper.select();
-          const copied = document.execCommand("copy");
-          helper.remove();
-          if (!copied) throw new Error("Copy command was unavailable.");
-        }
-        byId("copy-status").textContent = "Next step copied.";
-      } catch (error) {
-        byId("copy-status").textContent = "Copy was unavailable. Select the next-step text above.";
-      }
-    }
-
-    function setTheme(theme) {
-      const normalized = theme === "dark" ? "dark" : "light";
-      document.documentElement.dataset.theme = normalized;
-      byId("theme-toggle").textContent = normalized === "dark" ? "Light theme" : "Dark theme";
-      storage.set("python-dashboard-theme", normalized);
-    }
-
-    byId("mastery-filter").addEventListener("change", renderMastery);
-    byId("copy-next").addEventListener("click", copyNextStep);
-    byId("theme-toggle").addEventListener("click", () => setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
-
-    const savedTheme = storage.get("python-dashboard-theme");
-    const preferredTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    setTheme(savedTheme || preferredTheme);
-
-    const savedTab = byId(storage.get("python-dashboard-tab") || "");
-    if (savedTab && savedTab.getAttribute("role") === "tab") activateTab(savedTab);
-
-    byId("generated-at").textContent = data.generatedAt ? new Date(data.generatedAt).toLocaleString() : "not yet";
-    renderHeader();
-    renderOverview();
-    renderPhases();
-    renderProjects();
-    renderSessions();
+    byId("mastery-filter").addEventListener("change",renderMastery);byId("copy-next").addEventListener("click",()=>copy(text(data.current.nextStep,"Complete placement."),"Next step copied.",byId("copy-status")));byId("primary-action").addEventListener("click",()=>data.learner.onboardingComplete?activateProject(data.current.projectId):openSetup());byId("edit-setup").addEventListener("click",openSetup);byId("close-setup").addEventListener("click",()=>byId("setup-dialog").close());
+    byId("setup-form").addEventListener("submit",()=>{data.learner.goal=byId("setup-goal").value.trim();data.learner.experience=byId("setup-experience").value;data.learner.sessionLength=byId("setup-duration").value;data.learner.interpreter=byId("setup-interpreter").value;data.learner.onboardingComplete=true;place(data.learner.experience);persist("Learning path created and saved locally.");setTimeout(()=>activateTab(byId("tab-practice")),0)});
+    byId("finish-project").addEventListener("click",finishProject);byId("copy-brief").addEventListener("click",()=>{const project=projectById();if(project)copy(`${project.name}\n\n${project.purpose}\n\nRequirements:\n${project.tasks.map((task,index)=>`${index+1}. ${task}`).join("\n")}`,"Project brief copied.",byId("practice-status"))});
+    byId("scratchpad").addEventListener("input",event=>{data.scratchpad=event.target.value;data.savedAt=new Date().toISOString();storage.set(STORE,JSON.stringify(data));byId("saved-at").textContent=new Date(data.savedAt).toLocaleString()});byId("session-form").addEventListener("submit",saveSession);byId("export-data").addEventListener("click",exportData);byId("export-data-secondary").addEventListener("click",exportData);byId("import-data").addEventListener("change",importData);byId("reset-data").addEventListener("click",resetData);byId("theme-toggle").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+    setTheme(storage.get(THEME)||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));const savedTab=byId(storage.get(TAB)||"");if(savedTab?.getAttribute("role")==="tab")activateTab(savedTab);renderAll();
   </script>
 </body>
 </html>

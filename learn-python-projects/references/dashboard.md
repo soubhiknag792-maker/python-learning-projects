@@ -1,6 +1,6 @@
 # Interactive Learning Dashboard
 
-Generate a self-contained browser window at `python-learning-workspace/dashboard.html` from the learner's current journal. Use `../assets/dashboard-template.html` as the base. The dashboard is a friendly view of verified learning state; `progress.md` remains authoritative.
+Generate a self-contained browser window at `python-learning-workspace/dashboard.html` from the learner's current journal. Use `../assets/dashboard-template.html` as the base. The dashboard combines a view of verified journal state with an explicitly local working copy for placement choices, checklists, scratch notes, and session drafts; `progress.md` remains authoritative.
 
 ## When to generate
 
@@ -15,13 +15,19 @@ Copy the template to the learning workspace and replace the entire contents of t
 
 ```json
 {
+  "version": 1,
   "generatedAt": "2026-08-30T19:30:00+05:30",
+  "savedAt": "",
   "learner": {
     "goal": "Broad Python foundation",
     "phase": "Phase 2 · Functions and decomposition",
-    "interpreter": "Python 3.12.5 · .venv\\Scripts\\python.exe"
+    "interpreter": "Python 3.12.5 · .venv\\Scripts\\python.exe",
+    "experience": "beginner",
+    "sessionLength": "60–90 minutes",
+    "onboardingComplete": true
   },
   "current": {
+    "projectId": "quiz",
     "project": "02 · Quiz refactor",
     "purpose": "Split a working quiz into focused functions.",
     "status": "active",
@@ -47,11 +53,15 @@ Copy the template to the learning workspace and replace the entire contents of t
   ],
   "projects": [
     {
+      "id": "quiz",
+      "phase": 1,
       "name": "02 · Quiz refactor",
       "status": "active",
       "concepts": ["functions", "testing"],
       "verification": "8 tests passed",
-      "path": "projects/02-quiz-refactor/"
+      "path": "projects/02-quiz-refactor/",
+      "tasks": ["Extract score_answer()", "Run the current tests"],
+      "completedTasks": ["Extract score_answer()"]
     }
   ],
   "sessions": [
@@ -61,7 +71,8 @@ Copy the template to the learning workspace and replace the entire contents of t
       "verification": "8 tests passed",
       "next": "Extract score_answer()."
     }
-  ]
+  ],
+  "scratchpad": ""
 }
 ```
 
@@ -73,15 +84,19 @@ Serialize data as JSON rather than interpolating it into markup or JavaScript. E
 
 The generated page must remain a single portable HTML file and work from `file://` without a server. Preserve these template behaviors:
 
-- Overview, Curriculum, Projects, and Sessions tabs with keyboard navigation.
+- Overview, Practice, Curriculum, Projects, and Sessions tabs with keyboard navigation.
 - Overall curriculum progress and mastery counts.
 - A mastery-state filter.
 - Expandable curriculum phase cards.
 - A copy-next-step action with a local-file-safe fallback.
-- Light/dark theme choice stored only in browser `localStorage`.
+- An adaptive placement form, project task checklists, a local scratchpad, and session-note capture.
+- Versioned browser `localStorage` autosave plus JSON import, export, and confirmed reset.
+- Light/dark theme choice stored in browser `localStorage`.
 - Responsive layout, visible focus states, semantic landmarks, reduced-motion support, and useful empty states.
 
-Do not add analytics, remote fonts, CDNs, network requests, credentials, executable learner code, or third-party scripts. UI preferences in `localStorage` are allowed; progress changes are not. The page must never claim that clicking a control updates `progress.md`.
+Do not add analytics, remote fonts, CDNs, network requests, credentials, executable learner code, or third-party scripts. The page must never claim that clicking a control updates `progress.md` or verifies Python behavior.
+
+The browser may store a non-authoritative working copy of checklist state, scratch notes, setup choices, and session drafts. Label these changes as local, keep verified mastery separate, and require coach review plus real command/test evidence before copying them into `progress.md`. A generated dashboard may merge exported browser JSON only after reviewing it against the learner's files and journal.
 
 ## Show and verify
 
@@ -91,7 +106,7 @@ After generation:
 2. Parse the embedded JSON and check that required top-level keys exist.
 3. Check the inline JavaScript for syntax errors when a JavaScript runtime is available.
 4. Open the local file in the available browser or HTML preview. If opening is unavailable, provide a clickable file link.
-5. Verify tab switching, keyboard focus, theme toggle, mastery filter, phase expansion, and copy-next-step behavior.
+5. Verify tab switching, keyboard focus, theme toggle, placement, task persistence, scratchpad persistence, session capture, mastery filter, phase expansion, copy actions, JSON export/import, and confirmed reset.
 6. Confirm there are no required network requests or console errors.
 
 If visual or interaction verification fails, keep the journal untouched, correct only the generated dashboard, and rerun the checks.
