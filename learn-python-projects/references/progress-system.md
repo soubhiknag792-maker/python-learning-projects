@@ -9,6 +9,7 @@ Use a readable Markdown journal as the source of continuity. The journal support
 - If exactly one journal exists, resume it. If several plausible journals exist, ask which one to use. If none exists and the user wants to start a learning session, create `python-learning-workspace/` in the agreed workspace.
 - Keep the generated interactive window at `python-learning-workspace/dashboard.html`. It mirrors the journal but never replaces it.
 - Treat dashboard checklists, scratch notes, and session drafts as an unverified local working copy. Review exported dashboard data against real learner files and command results before promoting any claim to this journal.
+- Treat a passed dashboard knowledge check or completed lesson as self-study progress, not independent mastery. Promote mastery only from explained, learner-written project work and verified behavior.
 - Keep projects under `python-learning-workspace/projects/<number>-<short-name>/` with stable, zero-padded numbers such as `01-unit-converter`.
 - Use one workspace-level `.venv` by default. A project may get its own environment only when dependency conflicts or isolation goals justify it.
 - Do not modify or delete unrelated files. Do not add generated caches, environments, secrets, or local databases to version control.

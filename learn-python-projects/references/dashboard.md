@@ -72,7 +72,14 @@ Copy the template to the learning workspace and replace the entire contents of t
       "next": "Extract score_answer()."
     }
   ],
-  "scratchpad": ""
+  "scratchpad": "",
+  "learningProgress": {
+    "activePath": "complete",
+    "completedLessons": ["start"],
+    "quizResults": {"start": true},
+    "quizAttempts": {"start": 1},
+    "lastLesson": "values"
+  }
 }
 ```
 
@@ -86,6 +93,9 @@ The generated page must remain a single portable HTML file and work from `file:/
 
 - Overview, Learn, Practice, Curriculum, Projects, and Sessions tabs with keyboard navigation.
 - A searchable and level-filterable Python lesson repository containing syntax patterns, small examples, key functions/APIs, pitfalls, and practice prompts.
+- Selectable complete, from-scratch, automation, data, and advanced learning paths with saved path progress and continuation.
+- One misconception-focused knowledge check per lesson. Require a correct answer before local lesson completion, explain the answer, and allow retries without penalty.
+- Local lesson-completion state, last-opened lesson, quiz success, and attempt counts included in JSON import/export.
 - Project-specific “Learn what you need” paths that connect each build to its prerequisite lessons without revealing a complete project solution.
 - Searchable built-in-function and standard-library quick references that remain useful offline.
 - Overall curriculum progress and mastery counts.
@@ -109,7 +119,7 @@ After generation:
 2. Parse both embedded JSON elements, check required top-level keys, and confirm each project maps to at least one lesson.
 3. Check the inline JavaScript for syntax errors when a JavaScript runtime is available.
 4. Open the local file in the available browser or HTML preview. If opening is unavailable, provide a clickable file link.
-5. Verify lesson search, level and project filters, lesson navigation, project-to-lesson links, copy-example, tab switching, keyboard focus, theme toggle, placement, task persistence, scratchpad persistence, session capture, mastery filter, phase expansion, copy actions, JSON export/import, and confirmed reset.
+5. Verify path selection, continue-path behavior, lesson search, level and project filters, lesson navigation, correct and incorrect knowledge-check feedback, completion gating and persistence, project-to-lesson links, copy-example, tab switching, keyboard focus, theme toggle, placement, task persistence, scratchpad persistence, session capture, mastery filter, phase expansion, copy actions, JSON export/import, and confirmed reset.
 6. Confirm there are no required network requests or console errors.
 
 If visual or interaction verification fails, keep the journal untouched, correct only the generated dashboard, and rerun the checks.
