@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://soubhiknag792-maker.github.io/python-learning-projects/sitemap.xml
